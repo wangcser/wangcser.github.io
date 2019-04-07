@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/GeorgePig-32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/GeorgePig-16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="SDN,Routing," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="在 Cisco Segment Routing 的中文官网上，思科用 8 个字总结了这项意义深远的 TE 技术 化繁为简 无远弗届 。  化繁为简，指越复杂的事情越是可以用简单的方法去化解。 无远弗届，指不管多远，没有到不了的。  在这里，思科用化繁为简表达 SR 技术对过去流量工程所积累下来的复杂状态的突破，用无远弗届来暗指路由技术的本质。 本文会结合我的实践对 SR 技术进行简单的介绍，并对技">
+<meta name="keywords" content="SDN,Routing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Segment Routing">
+<meta property="og:url" content="http://yoursite.com/2019/03/05/segment-routing/index.html">
+<meta property="og:site_name" content="PPGP">
+<meta property="og:description" content="在 Cisco Segment Routing 的中文官网上，思科用 8 个字总结了这项意义深远的 TE 技术 化繁为简 无远弗届 。  化繁为简，指越复杂的事情越是可以用简单的方法去化解。 无远弗届，指不管多远，没有到不了的。  在这里，思科用化繁为简表达 SR 技术对过去流量工程所积累下来的复杂状态的突破，用无远弗届来暗指路由技术的本质。 本文会结合我的实践对 SR 技术进行简单的介绍，并对技">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-04-07T12:13:24.353Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Segment Routing">
+<meta name="twitter:description" content="在 Cisco Segment Routing 的中文官网上，思科用 8 个字总结了这项意义深远的 TE 技术 化繁为简 无远弗届 。  化繁为简，指越复杂的事情越是可以用简单的方法去化解。 无远弗届，指不管多远，没有到不了的。  在这里，思科用化繁为简表达 SR 技术对过去流量工程所积累下来的复杂状态的突破，用无远弗届来暗指路由技术的本质。 本文会结合我的实践对 SR 技术进行简单的介绍，并对技">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/05/segment-routing/"/>
+
+
+
+
+
+  <title>Segment Routing | PPGP</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PPGP</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">A site for Ms. Peppa and Mr. George, also Mr Dinosaur!</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/05/segment-routing/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="S-Wong, M-Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/GeorgePig-128x128.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PPGP">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Segment Routing</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-07T20:13:24+08:00">
+                2019-04-07
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SDN/" itemprop="url" rel="index">
+                    <span itemprop="name">SDN</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在 Cisco Segment Routing 的中文官网上，思科用 8 个字总结了这项意义深远的 TE 技术 <strong>化繁为简 无远弗届</strong> 。</p>
+<ul>
+<li>化繁为简，指越复杂的事情越是可以用简单的方法去化解。</li>
+<li>无远弗届，指不管多远，没有到不了的。</li>
+</ul>
+<p>在这里，思科用化繁为简表达 SR 技术对过去流量工程所积累下来的复杂状态的突破，用无远弗届来暗指路由技术的本质。</p>
+<p>本文会结合我的实践对 SR 技术进行简单的介绍，并对技术背后的设计思想做有限的揣度。关于 SR 技术的细节推荐大家直接去看 Clarence Filsfils 的《Segment Routing 详解》，他是 SR 技术的发明者。</p>
+<h2 id="出发"><a href="#出发" class="headerlink" title="出发"></a>出发</h2><p>在开始我们的旅程之前，我们先回顾一些简单的网络知识，通过几个问题来介绍旅程的背景知识。</p>
+<p><strong>终端产生的数据是如何通过网络到达目的终端的？</strong></p>
+<p>我们先来看一个形象的例子：</p>
+<ul>
+<li>终端产生的数据被打包成报文的形式交给网络，这个过程类似于你将文件交给快递公司，由快递公司将文件装进特定的包装里并打上相应的标记。</li>
+<li>网络就像城市一样，从一点到另一点可能存在很多种走法。网络中的每个岔路口都有一个网络设备在站岗，每当快递员带着包裹来问路的时候就按自己手上的地图告诉快递员从哪条路出去最近</li>
+<li>带着包裹的快递员每到一个岔路就问一次，他总是选择当前到最短的路线向着目标进发</li>
+</ul>
+<p>上面介绍的就是由网络提供的路由技术，它完成了数据包的传递工作。下面我们结合具体的路由技术来看看上面的过程。</p>
+<p>如果这个快递公司只为一个很小的城市提供服务，并且这个城市已经发展很成熟了，不再需要大兴土木搞城市建设了。如果他能记得这个城市所有的路口并为所有的用户提供准备好的运输路线，那么这个快递公司就不需要再采用向路口的网络设备问路了，快递公司只需要在每个路口建一个路标，快递员自己查看路标就行了——这就是静态路由算法，由网络管理员提前在网络设备上配置好各自的路由表。</p>
+<p>如果这个快递公司为一个大型城市服务，或者这个城市的道路情况经常发生变化（随机修路），如果快递公司继续采用静态路由算法，由于城市链接情况经常改变，为了保证公司的业务水平，快递公司必须经常修改他的运输地图——这就是动态路由算法。在动态路由算法中发展出了两种主要的策略：</p>
+<ul>
+<li>一种是每次网络更新时所有人告诉自己的邻居自己的连接情况，邻居再把他收集到的情况汇总后告诉他的邻居，以此类推，最终，网络中的所有设备都会得到整个网络的连接情况，每个设备单独地用 dijkstra 算法算出网络中的最短路情况，这就是 OSPF 协议</li>
+<li>另一种是网络设备收到邻居的礼物后主动的计算当前局部地图上的最短路情况，并把这个情况告诉邻居的邻居，这就是 RIP 协议</li>
+</ul>
+<p>具体的路由协议比如 IGP, BGP, IS-IS 等等其内容会变得更加复杂，但他们都遵循着一条最简单的信条——最短路。</p>
+<p>这就是传统网络中使用的路由协议，网络总是将包裹发送到距离终点最短的下一个十字路口。</p>
+<p><strong>最短路会产生什么问题吗？</strong></p>
+<p>最短路作为一个优化目标是最符合直觉的，它是人类生活中最常用的一种优化策略。但是最短路也会引发一些问题，比如：</p>
+<ul>
+<li>你并不知道你的报文经过了哪些节点</li>
+<li>人人都选择最短路，那么在必经之路上就会产生严重的拥塞</li>
+<li>结合上面两点，发生了拥塞之后你也很难去纾解拥塞</li>
+</ul>
+<p>OK，最后我们来总结一下传统网络中数据的传输策略——网络设备采用分布式决策为包裹选择自己认为的最短路进行存储转发。</p>
+<p><strong>还有没有其他方法？</strong></p>
+<p>为了招揽更多的客户，快递公司提供了一项 VIP 服务：用户可以提供一张站点表，上面一次写上用户希望包裹经过的路口，快递公司将这个表贴在包裹外面，要求快递员必须按照表上的路线送达——这就是源路由协议，用户可以指定其所发送的数据包沿途经过的部分或者全部路由器。</p>
+<p>本文介绍的 Segment Routing 就是一种源路由机制，如果说 MPLS 是指定经过的所有节点的话，SR 就是指定路途上的关键节点，关键节点之间依然采用最短路策略。</p>
+<p>对于 MPLS 协议，我们提前为用户选择的路设定一个标签，当匹配的包裹进入网络是我们就给他打上这个标签，包裹拿着这个标签穿越 MPLS 网络，在出口处摘下标签，由边缘路由器将包裹交给目标网络继续转发。</p>
+<p>对于 SR 协议，我们将网络中所有的设备和线路标号，当用户包裹进入网络时根据用户的需求选择一些关键路线和关键节点贴到包裹上构成标签栈，包裹按照标签栈的指示依次按最短路到达栈顶标签所指示的位置，由相应网络设备弹出其栈顶标签，包裹继续转发到下一栈顶标签的位置，以此重复，直到离开 SR 网络。</p>
+<p>通过上面的介绍，我们可以发现源路由协议与传统路由协议有一个很大的区别：可控。</p>
+<p>也正是这一点，源路由协议非常适合在 SDN 网络中部署，过去在分布式网络中很复杂的决策过程在 SDN 网络中变得非常简单。</p>
+<p><strong>我们怎么使用 Segement Routing？</strong></p>
+<p>经过我的搜索，目前 SR 技术有两种实现载体 MPLS 和 IPv6</p>
+<ol>
+<li>SR on IPv6 (SRv6)</li>
+</ol>
+<p>这个方案的关键细节如下：</p>
+<ul>
+<li>使用 v6 拓展头部（Routing Header）</li>
+<li>SRH 中包含一个 Segment List，编码为 IPv6 address，每个地址代表一个节点或者一条邻接关系</li>
+<li>SRH 中含有一个 Segments Left 指针，指示当前活动的 Segment</li>
+<li>SRH 中可以使用 TLV</li>
+</ul>
+<p>总的来说，就是利用了 IPv6 协议的扩展头部来实现 Segment List，思路很直观，但是使用起来就很令人抓狂，这是因为在我的仿真过程中需要满足：</p>
+<ul>
+<li>Openflow 要支持操作 IPv6 拓展头中的相应字段（目前似乎还为支持到这个字段）</li>
+<li>仿真网络要使用 IPv6</li>
+<li>操作系统要支持 IPv6，并提供相应的操作接口（Linux 内核中已经支持了 IPv6 和 SRv6，但是文档……）</li>
+</ul>
+<p>卒。</p>
+<ol start="2">
+<li>SR on MPLS</li>
+</ol>
+<p>SR 在 SDN 中的行为和 MPLS 非常相似，因此在 SDN 中使用 MPLS 来仿真 SR 才是最方便的方案，也是思科在 SR 解析中提倡的思路。因此，你只需要在 mininet 中使用 openvswitch 操作报文即可。</p>
+<h2 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h2><p>这里提到三类路由策略 (BGP, MPLS, SR) 并非随意枚举，当你将这三者放在一起考虑时，就会发现：</p>
+<ul>
+<li>最开始的时候用户啥都不用管，只需要告诉快递公司这个包裹送到 51.51.51.51，快递员就带着包裹逐跳逐跳地为你跑路</li>
+<li>后来快递公司开通了专线服务，公司提前耗费人力物力配置好专线，用户的包裹只要符合专线的条件，就交给专线处理，提升速度的同时，却增大了公司专线的运维成本和统一收集信息的成本</li>
+<li>之后公司成立了控制中心收集包裹的信息和网络的情况，并在物流网络中设定了一些处理能力比较强的节点，将用户的包裹分散了不同的中转节点进行处理，以此来从整个网络的视角优化网络性能</li>
+</ul>
+<h2 id="再出发"><a href="#再出发" class="headerlink" title="再出发"></a>再出发</h2><p>下面来总结一下：</p>
+<ul>
+<li>从控制的层面来看，网络的控制是越来越集中了，更好利用网络资源的同时增大了控制面单点故障的风险</li>
+<li>从计算的层面来看，传统网络的分布式计算群体决策演变为集中计算中央决策，群众减负，支持更多的服务，另一方面中央增加了负担，还需要承担整个网络的可靠性风险</li>
+<li>从数据的层面来看，数据在网络中的分布可以变的更加的均衡，但是牺牲以一定的时延和速度</li>
+</ul>
+<p>那么，这个问题的 trade-off 在哪里呢？</p>
+<p>区块链技术的发展又是何其相似。</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a href="https://www.cisco.com/c/zh_cn/solutions/service-provider/segment_routing.html?dtid=odicdc000673#~stickynav=3" target="_blank" rel="noopener">https://www.cisco.com/c/zh_cn/solutions/service-provider/segment_routing.html?dtid=odicdc000673#~stickynav=3</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/SDN/" rel="tag"><i class="fa fa-tag"></i> SDN</a>
+          
+            <a href="/tags/Routing/" rel="tag"><i class="fa fa-tag"></i> Routing</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/04/intern-antfin/" rel="next" title="区块链面试指北-蚂蚁金服">
+                <i class="fa fa-chevron-left"></i> 区块链面试指北-蚂蚁金服
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/05/fat-tree-topo/" rel="prev" title="Fat Tree Topo">
+                Fat Tree Topo <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/GeorgePig-128x128.png"
+                alt="S-Wong, M-Li" />
+            
+              <p class="site-author-name" itemprop="name">S-Wong, M-Li</p>
+              <p class="site-description motion-element" itemprop="description">Token Dynamic</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:wangcser@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                My Friends
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://silence.langinteger.com/" title="Happy Yasuo" target="_blank">Happy Yasuo</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#出发"><span class="nav-number">1.</span> <span class="nav-text">出发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#回顾"><span class="nav-number">2.</span> <span class="nav-text">回顾</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#再出发"><span class="nav-number">3.</span> <span class="nav-text">再出发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-superpowers"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">S-Wong, M-Li</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>

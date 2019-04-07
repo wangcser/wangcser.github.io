@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/GeorgePig-32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/GeorgePig-16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="SDN,DCN,Topo," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Introduction随着 ICT 技术的发展，数据中心网络（DCN）已经成为当今信息社会的基础设施，作为一种网络形态，其网络需求和网络拓扑表现出一定的特点：  高度可拓展性：随着业务的扩大平稳地接入更多的服务器和交换机，实现性能的平稳扩展 多路径：避免单点故障，实现链路的负载均衡 低时延：考虑到低时延业务的需求 高带宽：满足业务的高吞吐率需求 网络互联开销低：使用便宜的低端交换机代替昂贵的专用">
+<meta name="keywords" content="SDN,DCN,Topo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Fat Tree Topo">
+<meta property="og:url" content="http://yoursite.com/2019/03/05/fat-tree-topo/index.html">
+<meta property="og:site_name" content="PPGP">
+<meta property="og:description" content="Introduction随着 ICT 技术的发展，数据中心网络（DCN）已经成为当今信息社会的基础设施，作为一种网络形态，其网络需求和网络拓扑表现出一定的特点：  高度可拓展性：随着业务的扩大平稳地接入更多的服务器和交换机，实现性能的平稳扩展 多路径：避免单点故障，实现链路的负载均衡 低时延：考虑到低时延业务的需求 高带宽：满足业务的高吞吐率需求 网络互联开销低：使用便宜的低端交换机代替昂贵的专用">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/03/05/fat-tree-topo/k4fattree.png">
+<meta property="og:updated_time" content="2019-04-07T12:13:24.353Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Fat Tree Topo">
+<meta name="twitter:description" content="Introduction随着 ICT 技术的发展，数据中心网络（DCN）已经成为当今信息社会的基础设施，作为一种网络形态，其网络需求和网络拓扑表现出一定的特点：  高度可拓展性：随着业务的扩大平稳地接入更多的服务器和交换机，实现性能的平稳扩展 多路径：避免单点故障，实现链路的负载均衡 低时延：考虑到低时延业务的需求 高带宽：满足业务的高吞吐率需求 网络互联开销低：使用便宜的低端交换机代替昂贵的专用">
+<meta name="twitter:image" content="http://yoursite.com/2019/03/05/fat-tree-topo/k4fattree.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/05/fat-tree-topo/"/>
+
+
+
+
+
+  <title>Fat Tree Topo | PPGP</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PPGP</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">A site for Ms. Peppa and Mr. George, also Mr Dinosaur!</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/05/fat-tree-topo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="S-Wong, M-Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/GeorgePig-128x128.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PPGP">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Fat Tree Topo</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-07T20:13:24+08:00">
+                2019-04-07
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SDN/" itemprop="url" rel="index">
+                    <span itemprop="name">SDN</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>随着 ICT 技术的发展，数据中心网络（DCN）已经成为当今信息社会的基础设施，作为一种网络形态，其网络需求和网络拓扑表现出一定的特点：</p>
+<ul>
+<li>高度可拓展性：随着业务的扩大平稳地接入更多的服务器和交换机，实现性能的平稳扩展</li>
+<li>多路径：避免单点故障，实现链路的负载均衡</li>
+<li>低时延：考虑到低时延业务的需求</li>
+<li>高带宽：满足业务的高吞吐率需求</li>
+<li>网络互联开销低：使用便宜的低端交换机代替昂贵的专用交换机</li>
+<li>模块化设计：利用模块化设计来降低网络运维的复杂度</li>
+<li>网络扁平化：构建网络的层数尽可能低，以利于网络的流量均衡，方便管理</li>
+<li>绿色节能：合理的网络布局有利于网络降低能耗，保护网络设备</li>
+</ul>
+<p>Fat Tree 拓扑是一种常用于数据中心网络（DCN）的拓扑结构，它是基于传统 Tree 拓扑的改进，下文按照技术演进关系推演出 Fat Tree 拓扑。</p>
+<h2 id="Details"><a href="#Details" class="headerlink" title="Details"></a>Details</h2><p>在 DCN 中，根据网络中负责转发数据的设备不同，可以将网络拓扑分为：Switch-only、Server-only和混合型拓扑。</p>
+<h3 id="Tree-拓扑"><a href="#Tree-拓扑" class="headerlink" title="Tree 拓扑"></a>Tree 拓扑</h3><p>该拓扑用于早期 DCN 中，<strong>该拓扑的结构特点为：</strong></p>
+<ul>
+<li>多跟树结构</li>
+<li>switch-only 型</li>
+<li>底层采用商用交换机与服服务器连接，高层采用专用交换设备</li>
+</ul>
+<p><strong>该拓扑的优点为：</strong></p>
+<ul>
+<li>结构简单，易于实现</li>
+</ul>
+<p><strong>该拓扑的缺点为：</strong></p>
+<ul>
+<li>采用垂直扩展方式实现扩展，由于高层交换机的端口数目限制，拓展的深度有限，难以满足现代 DCN 需求（2 层结构能容纳 5k～8k 个服务器）</li>
+<li>网络容错性能差，网络中的节点或者链路故障容易切分网络</li>
+<li>流量分布不均匀，容易在核心节点处汇聚，使核心节点成为性能瓶颈</li>
+<li>专用交换机采购开销巨大</li>
+</ul>
+<h3 id="Fat-Tree-拓扑"><a href="#Fat-Tree-拓扑" class="headerlink" title="Fat Tree 拓扑"></a>Fat Tree 拓扑</h3><p><img src="/2019/03/05/fat-tree-topo/k4fattree.png" alt="k4fattree"></p>
+<p>Fat Tree 拓扑是由 MIT 的 Al-Fares 等人在改进传统 Tree 结构的基础上提出的。<strong>该拓扑的结构特点为：</strong></p>
+<ul>
+<li>网络分为三层，自下而上分别为：Edge, Aggregate, Core</li>
+<li>汇聚层交换机与边缘交换机构成一个 Pod</li>
+<li>所有交换机均采用商用交换机</li>
+</ul>
+<p>拓扑和核心参数为：Pod 数 k 和每个 ToR 交换机下 Server 的接入数 density，<strong>拓扑的构建规则如下：</strong></p>
+<ul>
+<li>k pods for each fat tree topo.</li>
+<li>k port for each switch, witch means density = k/2</li>
+<li>k/2 edge switches and k/2 aggregate switches for each pod</li>
+<li>(k/2)^2 core switch</li>
+<li>k/2 servers or hosts in each edge switch, witch means (k/2)^2 hosts in each pod, (k^3)/4 hosts for the topo.</li>
+<li>servers connect to its own ToR edge switch</li>
+<li>edge switch connect to all aggregate switch in the same pod</li>
+<li>aggregate connect to core switch by special method</li>
+</ul>
+<p><strong>拓扑的性能特征为：</strong></p>
+<ul>
+<li>网络直径 2logk</li>
+<li>并行链路 (k/2)^2</li>
+<li>扩展能力 (k^3)/4 </li>
+</ul>
+<p><strong>拓扑的优点为：</strong> </p>
+<ul>
+<li>网络采用水平扩展方式，通过横向增加网络中的 pod 就能使网络支持更多的服务器</li>
+<li>对分带宽随着网络规模的扩大而扩大</li>
+<li>在核心层使用多条链路实现负载均衡，不同 pod 之间有多条并行路径（ECMP）</li>
+<li>在 pod 内合理分流优化网络负载</li>
+<li>网络容错性能好，一般不会出现单点故障</li>
+<li>网络直径小，这意味着网络理论时延小，实时性好</li>
+<li>拓扑规则，利于模块化设计和拓展</li>
+<li>采用商用交换机，大幅降低网络设备 的开销</li>
+</ul>
+<p><strong>拓扑的缺点：</strong></p>
+<ul>
+<li>理论上其拓展性能受限于交换机端口数 k</li>
+<li>Pod 内拓扑的容错性能差</li>
+<li>网络不能很好的支持 one-to-all，all-to-all 通信模式，不利于部署 MapReduce 等现代高性能应用</li>
+<li>网络中交换机与服务器比值较大</li>
+</ul>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>现在再回过头来看看我们的胖树拓扑，为什么是 胖？</p>
+<ul>
+<li>Tree 拓扑中带宽是逐层收敛的，树根处的带宽远小于叶子处所有带宽之和，而 Fat Tree 中越到树根，枝干越粗</li>
+<li>拓扑的扩展是横向进行了，从树的角度来思考，树变宽了而不是变深了</li>
+<li>任意节点的上下行带宽是相等的</li>
+<li>不同 pod 之间的距离是相等的，这意味着网络的时延很小，且取值很少</li>
+</ul>
+<h2 id="Implement"><a href="#Implement" class="headerlink" title="Implement"></a>Implement</h2><p>模拟 4 个 pod 的 Fat-Tree 拓扑，拓扑参数如下：</p>
+<ul>
+<li><p>20 个交换机，每个交换机有 4 个接口</p>
+<ul>
+<li>4 个核心交换机（core switch， cs），编号 cs001~cs004</li>
+<li>8 个汇聚交换机（aggregate switch， as），编号 as001~as008</li>
+<li>8 个边缘交换机（edge switch，es），也称为 ToR 交换机，编号 es001~es008</li>
+</ul>
+</li>
+<li><p>每个 es 接入 2 个 host（density=2），一共 16 个 host</p>
+<ul>
+<li>我们对 host 进行了资源限制，每个 host 使用 1/16 的 CPU 处理能力</li>
+</ul>
+</li>
+<li><p>48 条链路</p>
+<ul>
+<li>链路时延 1ms</li>
+<li>带宽 host-es 100M，es-as 500M, as-cs 1000M （经过验证，带宽对我们的实验没有影响）</li>
+</ul>
+</li>
+<li><p>我们对 host 设计了新的 IPv4 地址 [10.pod.tor.index]，其中：</p>
+<ul>
+<li>10 为公共前缀</li>
+<li>pod 代表 host 所属的 pod，k=4 时 pod 可取 [1, 2, 3, 4]</li>
+<li>tor 代表 host 所属的 tor 交换机，k=4 时 tor 可取 [1, 2]</li>
+<li>index 代表该 tor 下的 host 序号，k=4 时 index 可取 [1, 2]</li>
+<li>举例: IPv4 = 10.2.1.2 代表 pod 2 的 es1 下面的第 2 个 host</li>
+</ul>
+</li>
+<li><p>我们对 switch 设计了新的 datapath id 方便控制器区分和访问：</p>
+<ul>
+<li><p>同一个 pod 中的 as 和 es 连续编号</p>
+</li>
+<li><p>不同 pod 之间采用 第一位进行区分</p>
+</li>
+<li><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">core_dpid_list = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line">aggr_dpid_list = [<span class="number">12</span>, <span class="number">13</span>, <span class="number">22</span>, <span class="number">23</span>, <span class="number">32</span>, <span class="number">33</span>, <span class="number">42</span>, <span class="number">43</span>]</span><br><span class="line">edge_dpid_list = [<span class="number">10</span>, <span class="number">11</span>, <span class="number">20</span>, <span class="number">21</span>, <span class="number">30</span>, <span class="number">31</span>, <span class="number">40</span>, <span class="number">41</span>]</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>交换机采用 openflow 1.3.0 协议</p>
+</li>
+</ul>
+<p>k4 Fat Tree 拓扑有如下特点：</p>
+<ul>
+<li>任意两点之间都存在多条可达且等价的路径，因此 Fat Tree Topo 上可以使用 ECMP 和 FRR 策略，本实验不使用这两种方法</li>
+</ul>
+<h2 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h2><p>由于目前在线资料中对 Fat Tree 拓扑实现的源码资料很少，实现方法也各不相同，在这里我给出我的实现 github</p>
+<p>这里针对拓扑的实现说一点题外话，在 SDN 试验中，构建拓扑时我们需要想清楚是用二层交换还是三层路由的思路来保证互联互通，虽然区分层次和 SDN 的思想相违背，由于用网络设备连接的还是传统的层次网络终端，因此他们的网络行为还是分层的。具体来说，就涉及到了 IP 地址的分配和子网的设计（在我的实现中，每个 ToR为一个子网，每个 pod 为一个子网）。</p>
+<p>同样的道理，如果希望制定精确的流表规则，我们也要针对不同的层次、协议进行匹配。</p>
+<h2 id="Comments-and-Reference"><a href="#Comments-and-Reference" class="headerlink" title="Comments and Reference"></a>Comments and Reference</h2><ul>
+<li>ToR: Top of Rank, 机柜接入交换机，相当于介入交换机或者 leaf switch</li>
+<li><a href="https://en.wikipedia.org/wiki/Fat_tree" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Fat_tree</a></li>
+<li><a href="https://www.cnblogs.com/zhuting/p/8880475.html" target="_blank" rel="noopener">https://www.cnblogs.com/zhuting/p/8880475.html</a></li>
+<li><a href="https://www.cnblogs.com/hdk1993/p/4571824.html" target="_blank" rel="noopener">https://www.cnblogs.com/hdk1993/p/4571824.html</a></li>
+<li><a href="https://wenku.baidu.com/view/b8b6cd595727a5e9846a6164.html" target="_blank" rel="noopener">https://wenku.baidu.com/view/b8b6cd595727a5e9846a6164.html</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/SDN/" rel="tag"><i class="fa fa-tag"></i> SDN</a>
+          
+            <a href="/tags/DCN/" rel="tag"><i class="fa fa-tag"></i> DCN</a>
+          
+            <a href="/tags/Topo/" rel="tag"><i class="fa fa-tag"></i> Topo</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/05/segment-routing/" rel="next" title="Segment Routing">
+                <i class="fa fa-chevron-left"></i> Segment Routing
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/05/flow-generation/" rel="prev" title="Network Flow Generation">
+                Network Flow Generation <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/GeorgePig-128x128.png"
+                alt="S-Wong, M-Li" />
+            
+              <p class="site-author-name" itemprop="name">S-Wong, M-Li</p>
+              <p class="site-description motion-element" itemprop="description">Token Dynamic</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:wangcser@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                My Friends
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://silence.langinteger.com/" title="Happy Yasuo" target="_blank">Happy Yasuo</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Details"><span class="nav-number">2.</span> <span class="nav-text">Details</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tree-拓扑"><span class="nav-number">2.1.</span> <span class="nav-text">Tree 拓扑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fat-Tree-拓扑"><span class="nav-number">2.2.</span> <span class="nav-text">Fat Tree 拓扑</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion"><span class="nav-number">3.</span> <span class="nav-text">Conclusion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Implement"><span class="nav-number">4.</span> <span class="nav-text">Implement</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Others"><span class="nav-number">5.</span> <span class="nav-text">Others</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Comments-and-Reference"><span class="nav-number">6.</span> <span class="nav-text">Comments and Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-superpowers"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">S-Wong, M-Li</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>

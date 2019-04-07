@@ -1,0 +1,1860 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/GeorgePig-32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/GeorgePig-16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Blockchain,Docker,DevOps," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="容器技术容器技术又称为容器虚拟化，是虚拟化技术的一种 虚拟化技术有硬件虚拟化、半虚拟化和操作系统虚拟化，Docker属于操作系统虚拟化，其相较于其他主流技术更轻量 虚拟化技术总结：  硬件虚拟化 软件虚拟化 应用虚拟化 Wine   平台虚拟化：虚拟机 操作系统虚拟化 容器技术 Docker          容器技术本身借鉴了工业运输的经验发展而来，《经济学人》这样评价工业运输领域的集装箱：没有">
+<meta name="keywords" content="Blockchain,Docker,DevOps">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker">
+<meta property="og:url" content="http://yoursite.com/2019/03/12/docker/index.html">
+<meta property="og:site_name" content="PPGP">
+<meta property="og:description" content="容器技术容器技术又称为容器虚拟化，是虚拟化技术的一种 虚拟化技术有硬件虚拟化、半虚拟化和操作系统虚拟化，Docker属于操作系统虚拟化，其相较于其他主流技术更轻量 虚拟化技术总结：  硬件虚拟化 软件虚拟化 应用虚拟化 Wine   平台虚拟化：虚拟机 操作系统虚拟化 容器技术 Docker          容器技术本身借鉴了工业运输的经验发展而来，《经济学人》这样评价工业运输领域的集装箱：没有">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/media/super/Dev%20Data/SuperNoteBook/Docker/assets/virtualization.png">
+<meta property="og:image" content="http://yoursite.com/media/super/Dev%20Data/SuperNoteBook/Docker/assets/docker.png">
+<meta property="og:image" content="http://yoursite.com/media/super/Dev%20Data/SuperNoteBook/Docker/assets/types-of-mounts.png">
+<meta property="og:image" content="http://yoursite.com/media/super/Dev%20Data/SuperNoteBook/Docker/assets/network.png">
+<meta property="og:image" content="http://yoursite.com/media/super/Dev%20Data/SuperNoteBook/Docker/assets/swarm-diagram.png">
+<meta property="og:image" content="http://yoursite.com/media/super/Dev%20Data/SuperNoteBook/Docker/assets/services-diagram.png">
+<meta property="og:image" content="http://yoursite.com/media/super/Dev%20Data/SuperNoteBook/Docker/assets/docker_arch.png">
+<meta property="og:updated_time" content="2019-04-07T12:13:24.353Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Docker">
+<meta name="twitter:description" content="容器技术容器技术又称为容器虚拟化，是虚拟化技术的一种 虚拟化技术有硬件虚拟化、半虚拟化和操作系统虚拟化，Docker属于操作系统虚拟化，其相较于其他主流技术更轻量 虚拟化技术总结：  硬件虚拟化 软件虚拟化 应用虚拟化 Wine   平台虚拟化：虚拟机 操作系统虚拟化 容器技术 Docker          容器技术本身借鉴了工业运输的经验发展而来，《经济学人》这样评价工业运输领域的集装箱：没有">
+<meta name="twitter:image" content="http://yoursite.com/media/super/Dev%20Data/SuperNoteBook/Docker/assets/virtualization.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/12/docker/"/>
+
+
+
+
+
+  <title>Docker | PPGP</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PPGP</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">A site for Ms. Peppa and Mr. George, also Mr Dinosaur!</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/12/docker/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="S-Wong, M-Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/GeorgePig-128x128.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PPGP">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Docker</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-07T20:13:24+08:00">
+                2019-04-07
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DevOps/" itemprop="url" rel="index">
+                    <span itemprop="name">DevOps</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="容器技术"><a href="#容器技术" class="headerlink" title="容器技术"></a>容器技术</h2><p>容器技术又称为容器虚拟化，是虚拟化技术的一种</p>
+<p>虚拟化技术有硬件虚拟化、半虚拟化和操作系统虚拟化，Docker属于操作系统虚拟化，其相较于其他主流技术更轻量</p>
+<p>虚拟化技术总结：</p>
+<ul>
+<li>硬件虚拟化</li>
+<li>软件虚拟化<ul>
+<li>应用虚拟化<ul>
+<li>Wine</li>
+</ul>
+</li>
+<li>平台虚拟化：虚拟机<ul>
+<li>操作系统虚拟化<ul>
+<li>容器技术<ul>
+<li>Docker</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>容器技术本身借鉴了工业运输的经验发展而来，《经济学人》这样评价工业运输领域的集装箱：没有集装箱，就没有全球化。</p>
+<p>物流领域的集装箱实现了货物的标准化，以此建立了全球范围的物流系统。</p>
+<p>软件行业的容器技术也在尝试打造一套标准化的软件构建、分发流程，以降低运维成本，提高软件的安全与稳定。</p>
+<h3 id="容器技术的发展"><a href="#容器技术的发展" class="headerlink" title="容器技术的发展"></a>容器技术的发展</h3><p>如果说工业上的集装箱是从一个箱子开始的，那么软件行业的容器就是从文件系统的隔离开始的。</p>
+<ul>
+<li>1979，最早的容器技术大概是 chroot，它是 UNIX 系统上的一个系统调用，用于将一个进程及其子进程的根目录改变到文件系统中的一个新位置，让该进程只能访问该目录。</li>
+<li>2000，Derrick T. Woworth 为 FreeBSD 引入了 Jails，它可以为文件系统、用户、网络等的隔离增加进程沙盒功能</li>
+<li>2001，Linux VServer 出现，其中的虚拟系统叫做 VPS</li>
+<li>2001，Virtuozzo</li>
+<li>2004，Solaris Containers</li>
+<li>2005，OpenVZ</li>
+<li>2006，Process Containers，后来改名为 Control Groups（CGroups）</li>
+<li>2008，LXC</li>
+<li>2011，Warden</li>
+<li>2013，Lmctfy</li>
+<li>2013，Docker</li>
+<li>2014，Rcket</li>
+</ul>
+<h3 id="容器技术的核心原理"><a href="#容器技术的核心原理" class="headerlink" title="容器技术的核心原理"></a>容器技术的核心原理</h3><p>容器技术的核心是 Cgroups（资源控制） 和 Linux namespace（资源隔离）。本质是宿主机上的进程</p>
+<h3 id="容器与-Docker"><a href="#容器与-Docker" class="headerlink" title="容器与 Docker"></a>容器与 Docker</h3><p>Docker 的核心可能是：</p>
+<ul>
+<li>对分层镜像的创新应用</li>
+<li>统一了应用的打包、分发和部署方式</li>
+</ul>
+<p>Docker 的创新不一定要依赖容器技术，容器成就了 Docker，Docker 促进容器技术的发展</p>
+<h3 id="如何理解-Docker"><a href="#如何理解-Docker" class="headerlink" title="如何理解 Docker"></a>如何理解 Docker</h3><ul>
+<li><p>Docker 是一个开源的应用容器引擎，开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到主流的平台上，实现虚拟化。</p>
+</li>
+<li><p>Docker 是一个重新定义了程序开发、测试、交付和部署的开放平台，Docker 就是集装箱，帮你把软件运输到不同的平台，并迅速部署</p>
+</li>
+</ul>
+<h2 id="What-is-Docker"><a href="#What-is-Docker" class="headerlink" title="What is Docker"></a>What is Docker</h2><p>Docker 是一种<strong>操作系统层面</strong>的<strong>虚拟化技术</strong>，由于其隔离的进程独立于宿主以及其他的隔离的进程，因此也称其为<strong>容器</strong>。</p>
+<p>传统虚拟机技术是：虚拟出一套硬件后，在其上运行一个完整操作系统，在该系统上再运行所需应用进程。</p>
+<p>而<strong>容器内的应用进程直接运行于宿主的内核</strong>，<strong>容器内没有自己的内核，而且也没有进行硬件虚拟。因此容器要比传统虚拟机更为轻便</strong>。</p>
+<p><img src="/2019/03/12/docker/../../../../media/super/Dev%20Data/SuperNoteBook/Docker/assets/virtualization.png" alt="传统虚拟化"></p>
+<p><img src="/2019/03/12/docker/../../../../media/super/Dev%20Data/SuperNoteBook/Docker/assets/docker.png" alt="Docker"></p>
+<h2 id="Why-Docker"><a href="#Why-Docker" class="headerlink" title="Why Docker"></a>Why Docker</h2><p>相比于传统的虚拟化方式，Docker 具有众多优势：</p>
+<ul>
+<li>对系统资源利用率更高：应用执行速度、内存损耗、文件IO</li>
+<li>更快的启动时间：毫秒级启动时间</li>
+<li>一致的运行环境：开发过程中一个常见的问题是环境一致性问题。由于开发环境、测试环境、生产环境不一致，导致有些 bug 并未能够在开发过程中被发现。而 Docker 的<strong>镜像提供了除内核外完整的运行时环境</strong>，确保了应用运行环境一致性，从而不会再出现 <em>「这段代码在我机器上没问题啊」</em> 这类问题</li>
+<li>持续交付和部署：对开发和运维（<a href="https://zh.wikipedia.org/wiki/DevOps" target="_blank" rel="noopener">DevOps</a>）人员来说，最希望的就是一次创建或配置，可以在任意地方正常运行。使用 Docker 可以通过定制应用镜像来实现持续集成、持续交付、部署。开发人员可以通过 <a href="https://yeasy.gitbooks.io/docker_practice/content/image/dockerfile" target="_blank" rel="noopener">Dockerfile</a> 来进行镜像构建，并结合 <a href="https://en.wikipedia.org/wiki/Continuous_integration" target="_blank" rel="noopener">持续集成(Continuous Integration)</a> 系统进行集成测试，而运维人员则可以直接在生产环境中快速部署该镜像，甚至结合 <a href="https://en.wikipedia.org/wiki/Continuous_delivery" target="_blank" rel="noopener">持续部署(Continuous Delivery/Deployment)</a> 系统进行自动部署</li>
+<li>更轻松的迁移：Docker 可以在很多平台上运行，无论是物理机、虚拟机、公有云、私有云，甚至是笔记本，其运行结果是一致的，因此用户可以很轻易的将在一个平台上运行的应用，迁移到另一个平台上，而不用担心运行环境的变化导致应用无法正常运行的情况</li>
+<li>更轻松的维护和扩展：Docker 使用的分层存储以及镜像的技术，使得应用重复部分的复用更为容易，也使得应用的维护更新更加简单，基于基础镜像进一步扩展镜像也变得非常简单</li>
+</ul>
+<p><strong>对虚拟机技术的比较</strong></p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>容器</th>
+<th>虚拟机</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>启动</td>
+<td>秒级</td>
+<td>分钟级</td>
+</tr>
+<tr>
+<td>硬盘使用</td>
+<td>一般为 <code>MB</code></td>
+<td>一般为 <code>GB</code></td>
+</tr>
+<tr>
+<td>性能</td>
+<td>接近原生</td>
+<td>弱于</td>
+</tr>
+<tr>
+<td>系统支持量</td>
+<td>单机支持上千个容器</td>
+<td>一般几十个</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Docker-Base-Concept"><a href="#Docker-Base-Concept" class="headerlink" title="Docker Base Concept"></a>Docker Base Concept</h2><p>Docker 包含了三个基本概念：image、container、registry</p>
+<p>Docker 运行容器前需要本地存在对应的镜像，如果本地不存在该镜像，Docker 会从镜像仓库下载该镜像</p>
+<h3 id="Docker-Image"><a href="#Docker-Image" class="headerlink" title="Docker Image"></a>Docker Image</h3><p><strong>Docker 镜像是一个特殊的文件系统</strong>，除了提供容器运行时所需的程序、库、资源、配置等文件外，还包含了一些为运行时准备的一些配置参数（如匿名卷、环境变量、用户等）。<strong>镜像不包含任何动态数据，其内容在构建之后也不会被改变</strong></p>
+<ul>
+<li><strong>文件系统</strong>：Docker 镜像（Image），就相当于是一个 <code>root</code> 文件系统（挂在于 内核态 中供 用户态 使用）</li>
+<li><strong>分层存储</strong>：Docker 使用 Union FS 技术，使用分层存储技术优化 Image 的体积和系统的构建</li>
+</ul>
+<h3 id="Docker-Container"><a href="#Docker-Container" class="headerlink" title="Docker Container"></a>Docker Container</h3><p>镜像（<code>Image</code>）和容器（<code>Container</code>）的关系，就像是面向对象程序设计中的 <code>类</code> 和 <code>实例</code> 一样，镜像是静态的定义，<strong>容器是镜像运行时的实体</strong>。容器可以被创建、启动、停止、删除、暂停等</p>
+<ul>
+<li>容器的实质是进程，属于自己独立的命名空间，运行于隔离环境中</li>
+<li>每一个容器运行时，以镜像为基础层，在其上创建一个当前容器的存储层，为容器运行时的读写做准备，存储层的信息随容器的删除而丢失</li>
+<li>Docker 中文件的写入应该使用 数据卷（Volume）或绑定宿主目录，直接对宿主进行读写，性能和稳定性更高</li>
+<li>数据卷独立于容器，容器删除后数据不会丢失</li>
+</ul>
+<h3 id="Docker-Registry"><a href="#Docker-Registry" class="headerlink" title="Docker Registry"></a>Docker Registry</h3><p>Docker Registry 用于存储、分发构建好的镜像，方便其他宿主使用。</p>
+<ul>
+<li>一个 Registry 中可以包含多个仓库 Repository，每个仓库包含多个标签 Tag，每个标签对应一个镜像。通常，一个仓库会包含同一软件的不同版本镜像，而标签常用于对应软件的各个版本 <code>&lt;repository&gt;:&lt;tag&gt;</code> ，如果不给出标签，将以 <code>latest</code> 作为默认标签</li>
+<li>仓库名常以两段式路径形式出现，如 <code>super/nginx-proxy</code> ，前者往往表示多用户环境下的用户名，后者往往是对应的软件名</li>
+</ul>
+<h4 id="公开服务"><a href="#公开服务" class="headerlink" title="公开服务"></a>公开服务</h4><p>Docker Registry 公开服务是开放给用户使用、允许用户管理镜像的 Registry 服务。一般这类公开服务允许用户免费上传、下载公开的镜像，并可能提供收费服务供用户管理私有镜像</p>
+<ul>
+<li>Docker Hub：<a href="https://hub.docker.com/" target="_blank" rel="noopener">https://hub.docker.com/</a></li>
+<li>coreOS：<a href="https://coreos.com/" target="_blank" rel="noopener">https://coreos.com/</a></li>
+<li>quay.io：<a href="https://quay.io/repository/" target="_blank" rel="noopener">https://quay.io/repository/</a></li>
+<li>Google Container Registry：<a href="https://cloud.google.com/container-registry/" target="_blank" rel="noopener">https://cloud.google.com/container-registry/</a></li>
+</ul>
+<p>国内的一些云服务商提供针对 Docker Hub 的镜像服务 <code>Registry Mirror</code> ，这些镜像服务被称为加速器</p>
+<ul>
+<li>DaoCloud 加速器：<a href="https://www.daocloud.io/mirror#accelerator-doc" target="_blank" rel="noopener">https://www.daocloud.io/mirror#accelerator-doc</a></li>
+<li>阿里云加速器：<a href="https://cr.console.aliyun.com/cn-hangzhou/new" target="_blank" rel="noopener">https://cr.console.aliyun.com/cn-hangzhou/new</a></li>
+</ul>
+<p>国内也有一些云服务商提供类似 Docker Hub 的公开服务，比如<a href="https://hub.tenxcloud.com/" target="_blank" rel="noopener">时速云镜像仓库</a>、<a href="https://c.163.com/hub#/m/library/" target="_blank" rel="noopener">网易云镜像服务</a>、<a href="https://hub.daocloud.io/" target="_blank" rel="noopener">DaoCloud 镜像市场</a>、<a href="https://cr.console.aliyun.com/" target="_blank" rel="noopener">阿里云镜像库</a> 等</p>
+<h4 id="私有服务"><a href="#私有服务" class="headerlink" title="私有服务"></a>私有服务</h4><p>除了使用公开服务外，用户还可以在本地搭建私有 Docker Registry。Docker 官方提供了 <a href="https://hub.docker.com/_/registry/" target="_blank" rel="noopener">Docker Registry</a>镜像，可以直接使用做为私有 Registry 服务</p>
+<h2 id="Installing-Docker"><a href="#Installing-Docker" class="headerlink" title="Installing Docker"></a>Installing Docker</h2><h3 id="安装工作"><a href="#安装工作" class="headerlink" title="安装工作"></a>安装工作</h3><p>Docker 分为 CE 和 EE 两大版本。CE 即社区版（免费，支持周期 7 个月），EE 即企业版，强调安全，付费使用，支持周期 24 个月。Docker CE 分为 <strong>stable</strong>, <strong>test</strong>, 和 <strong>nightly</strong> 三个更新频道。每六个月发布一个 <strong>stable</strong> 版本 (18.09, 19.03, 19.09…)</p>
+<p>官方网站上有 Docker 各种环境下的 <a href="https://docs.docker.com/engine/installation/" target="_blank" rel="noopener">安装指南</a>，请参阅安装指南</p>
+<h3 id="关键工作"><a href="#关键工作" class="headerlink" title="关键工作"></a>关键工作</h3><p><strong>启动 Docker</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl enable docker</span><br><span class="line">sudo systemctl start docker</span><br></pre></td></tr></table></figure>
+<p><strong>建立 docker 用户组</strong></p>
+<p>默认情况下，<code>docker</code> 命令会使用 <a href="https://en.wikipedia.org/wiki/Unix_domain_socket" target="_blank" rel="noopener">Unix socket</a> 与 Docker 引擎通讯。而只有 <code>root</code> 用户和 <code>docker</code> 组的用户才可以访问 Docker 引擎的 Unix socket。出于安全考虑，一般 Linux 系统上不会直接使用 <code>root</code> 用户。因此，更好地做法是将需要使用 <code>docker</code> 的用户加入 <code>docker</code> 用户组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo groupadd docker</span><br><span class="line">sudo usermod -aG docker $USER</span><br></pre></td></tr></table></figure>
+<p><strong>测试安装</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run hello-world</span><br></pre></td></tr></table></figure>
+<p><strong>配置加速器</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ vim /etc/docker/daemon.json</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;registry-mirrors&quot;: [</span><br><span class="line">    &quot;https://registry.docker-cn.com&quot;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$ sudo systemctl daemon-reload</span><br><span class="line">$ sudo systemctl restart docker</span><br></pre></td></tr></table></figure>
+<p><strong>验证加速器</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker info</span><br></pre></td></tr></table></figure>
+<h2 id="Using-Image"><a href="#Using-Image" class="headerlink" title="Using Image"></a>Using Image</h2><h3 id="从仓库获取镜像"><a href="#从仓库获取镜像" class="headerlink" title="从仓库获取镜像"></a>从仓库获取镜像</h3><p><strong>下载</strong></p>
+<p>从 Docker 镜像仓库获取镜像：</p>
+<ul>
+<li>Docker 镜像仓库地址：地址的格式一般是 <code>&lt;域名/IP&gt;[:端口号]</code>。默认地址是 Docker Hub</li>
+<li>仓库名：如之前所说，这里的仓库名是两段式名称，即 <code>&lt;用户名&gt;/&lt;软件名&gt;</code>。对于 Docker Hub，如果不给出用户名，则默认为 <code>library</code>，也就是官方镜像</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">docker pull [选项] [Docker Registry 地址[:端口号]/]仓库名[:标签]</span><br><span class="line"></span><br><span class="line">$ docker pull ubuntu:18.04</span><br><span class="line">bf5d46315322: Pull complete</span><br><span class="line">9f13e0ac480c: Pull complete</span><br><span class="line">e8988b5b3097: Pull complete</span><br><span class="line">40af181810e7: Pull complete</span><br><span class="line">e6f7c7e5c03e: Pull complete</span><br><span class="line">Digest: sha256:147913621d9cdea08853f6ba9116c2e27a3ceffecf3b492983ae97c3d643fbbe</span><br><span class="line">Status: Downloaded newer image for ubuntu:18.</span><br></pre></td></tr></table></figure>
+<p>注意：从下载过程中可以看到我们之前提及的分层存储的概念，镜像是由多层存储所构成。下载也是一层层的去下载，并非单一文件。下载过程中给出了每一层的 ID 的前 12 位。并且下载结束后，给出该镜像完整的 <code>sha256</code> 的摘要，以确保下载一致性</p>
+<p><strong>运行</strong></p>
+<p>有了镜像后，我们就能够以这个镜像为基础启动并运行一个容器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -it --rm ubuntu:18.04 bash</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>-it</code>：这是两个参数，一个是 <code>-i</code>：交互式操作，一个是 <code>-t</code> 终端。我们这里打算进入 <code>bash</code> 执行一些命令并查看返回结果，因此我们需要交互式终端。</li>
+<li><code>--rm</code>：这个参数是说容器退出后随之将其删除。默认情况下，为了排障需求，退出的容器并不会立即删除，除非手动 <code>docker rm</code>。我们这里只是随便执行个命令，看看结果，不需要排障和保留结果，因此使用 <code>--rm</code> 可以避免浪费空间。</li>
+<li><code>ubuntu:18.04</code>：这是指用 <code>ubuntu:18.04</code> 镜像为基础来启动容器。</li>
+<li><code>bash</code>：放在镜像名后的是<strong>命令</strong>，这里我们希望有个交互式 Shell，因此用的是 <code>bash</code></li>
+</ul>
+<h3 id="管理本地镜像"><a href="#管理本地镜像" class="headerlink" title="管理本地镜像"></a>管理本地镜像</h3><p><strong>列出镜像</strong></p>
+<p>要想列出已经下载下来的镜像，可以使用 <code>docker image ls</code> 命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ docker image ls</span><br><span class="line">REPOSITORY           TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">redis                latest              5f515359c7f8        5 days ago          183 MB</span><br><span class="line">nginx                latest              05a60462f8ba        5 days ago          181 MB</span><br><span class="line">mongo                3.2                 fe9198c04d62        5 days ago          342 MB</span><br><span class="line">&lt;none&gt;               &lt;none&gt;              00285df0df87        5 days ago          342 MB</span><br><span class="line">ubuntu               18.04               f753707788c5        4 weeks ago         127 MB</span><br><span class="line">ubuntu               latest              f753707788c5        4 weeks ago         127 MB</span><br></pre></td></tr></table></figure>
+<p>列表包含了 <code>仓库名</code>、<code>标签</code>、<code>镜像 ID</code>、<code>创建时间</code> 以及 <code>所占用的空间</code>，<strong>镜像 ID</strong> 则是镜像的唯一标识，一个镜像可以对应多个<strong>标签</strong>。因此，在上面的例子中，我们可以看到 <code>ubuntu:18.04</code> 和 <code>ubuntu:latest</code> 拥有相同的 ID，因为它们对应的是同一个镜像</p>
+<p><strong>镜像体积</strong></p>
+<p>如果仔细观察，会注意到，这里标识的所占用空间和在 Docker Hub 上看到的镜像大小不同。比如，<code>ubuntu:18.04</code> 镜像大小，在这里是 <code>127 MB</code>，但是在 <a href="https://hub.docker.com/r/library/ubuntu/tags/" target="_blank" rel="noopener">Docker Hub</a> 显示的却是 <code>50 MB</code>。这是因为 Docker Hub 中显示的体积是压缩后的体积。在镜像下载和上传过程中镜像是保持着压缩状态的，因此 <strong>Docker Hub 所显示的大小是网络传输中更关心的流量大小</strong>。<strong>而 <code>docker image ls</code> 显示的是镜像下载到本地后，展开的大小</strong>，准确说，是展开后的各层所占空间的总和，因为镜像到本地后，查看空间的时候，更关心的是本地磁盘空间占用的大小</p>
+<p>另外一个需要注意的问题是，<code>docker image ls</code> 列表中的镜像体积总和并非是所有镜像实际硬盘消耗。由于 Docker 镜像是多层存储结构，并且可以继承、复用，因此不同镜像可能会因为使用相同的基础镜像，从而拥有共同的层。由于 Docker 使用 Union FS，相同的层只需要保存一份即可，因此<strong>实际镜像硬盘占用空间很可能要比这个列表镜像大小的总和要小的多</strong></p>
+<p>可以通过以下命令来便捷的查看镜像、容器、数据卷所占用的空间</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ docker system df</span><br><span class="line"></span><br><span class="line">TYPE                TOTAL               ACTIVE              SIZE                RECLAIMABLE</span><br><span class="line">Images              24                  0                   1.992GB             1.992GB (100%)</span><br><span class="line">Containers          1                   0                   62.82MB             62.82MB (100%)</span><br><span class="line">Local Volumes       9                   0                   652.2MB             652.2MB (100%)</span><br><span class="line">Build Cache                                                 0B                  0B</span><br></pre></td></tr></table></figure>
+<p><strong>虚悬镜像</strong></p>
+<p>一个特殊的镜像，这个镜像既没有仓库名，也没有标签，均为 <code>&lt;none&gt;</code> ，一般来说，虚悬镜像已经失去了存在的价值，是可以随意删除的，可以用下面的命令删除</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker image prune</span><br></pre></td></tr></table></figure>
+<p><strong>中间层镜像</strong></p>
+<p>为了加速镜像构建、重复利用资源，Docker 会利用 <strong>中间层镜像</strong>。所以在使用一段时间后，可能会看到一些依赖的中间层镜像。默认的 <code>docker image ls</code> 列表中只会显示顶层镜像，如果希望显示包括中间层镜像在内的所有镜像的话，需要加 <code>-a</code> 参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker image ls -a</span><br></pre></td></tr></table></figure>
+<p>这样会看到很多无标签的镜像，与之前的虚悬镜像不同，这些无标签的镜像很多都是中间层镜像，是其它镜像所依赖的镜像。这些无标签镜像不应该删除，否则会导致上层镜像因为依赖丢失而出错。实际上，这些镜像也没必要删除，因为之前说过，相同的层只会存一遍，而这些镜像是别的镜像的依赖，因此并不会因为它们被列出来而多存了一份，无论如何你也会需要它们。只要删除那些依赖它们的镜像后，这些依赖的中间层镜像也会被连带删除</p>
+<p><strong>列出部分镜像</strong></p>
+<p>不加任何参数的情况下，<code>docker image ls</code> 会列出所有顶级镜像，但是有时候我们只希望列出部分镜像。<code>docker image ls</code> 有好几个参数可以帮助做到这个事情</p>
+<p>根据仓库名列出镜像</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ docker image ls ubuntu</span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">ubuntu              18.04               f753707788c5        4 weeks ago         127 MB</span><br><span class="line">ubuntu              latest              f753707788c5        4 weeks ago         127 MB</span><br></pre></td></tr></table></figure>
+<p>列出特定的某个镜像，也就是说指定仓库名和标签</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ docker image ls ubuntu:18.04</span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">ubuntu              18.04               f753707788c5        4 weeks ago         127 MB</span><br></pre></td></tr></table></figure>
+<p><strong>删除本地镜像</strong></p>
+<p>如果要删除本地的镜像，可以使用 <code>docker image rm</code> 命令，其格式为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker image rm [选项] &lt;镜像1&gt; [&lt;镜像2&gt; ...]</span><br></pre></td></tr></table></figure>
+<p><code>&lt;镜像&gt;</code> 可以是 <code>镜像短 ID</code>、<code>镜像长 ID</code>、<code>镜像名</code> 或者 <code>镜像摘要</code> ，我们可以用镜像的完整 ID，也称为 <code>长 ID</code>，来删除镜像。使用脚本的时候可能会用长 ID，但是人工输入就太累了，所以更多的时候是用 <code>短 ID</code> 来删除镜像。<code>docker image ls</code> 默认列出的就已经是短 ID 了，一般取前3个字符以上，只要足够区分于别的镜像就可以了</p>
+<p>删除行为分为两类，一类是 <code>Untagged</code>，另一类是 <code>Deleted</code>。我们之前介绍过，镜像的唯一标识是其 ID 和摘要，而一个镜像可以有多个标签，因此当我们使用上面命令删除镜像的时候，实际上是在要求删除某个标签的镜像。所以首先需要做的是将满足我们要求的所有镜像标签都取消，这就是我们看到的 <code>Untagged</code> 的信息。因为一个镜像可以对应多个标签，因此当我们删除了所指定的标签后，可能还有别的标签指向了这个镜像，如果是这种情况，那么 <code>Delete</code> 行为就不会发生。所以并非所有的 <code>docker image rm</code> 都会产生删除镜像的行为，有可能仅仅是取消了某个标签而已。</p>
+<p>当该镜像所有的标签都被取消了，该镜像很可能会失去了存在的意义，因此会触发删除行为。镜像是多层存储结构，因此在删除的时候也是从上层向基础层方向依次进行判断删除。镜像的多层结构让镜像复用变动非常容易，因此很有可能某个其它镜像正依赖于当前镜像的某一层。这种情况，依旧不会触发删除该层的行为。直到没有任何层依赖当前层时，才会真实的删除当前层。这就是为什么，有时候会奇怪，为什么明明没有别的标签指向这个镜像，但是它还是存在的原因，也是为什么有时候会发现所删除的层数和自己 <code>docker pull</code> 看到的层数不一样的源</p>
+<p>除了镜像依赖以外，还需要注意的是容器对镜像的依赖。如果有用这个镜像启动的容器存在（即使容器没有运行），那么同样不可以删除这个镜像。之前讲过，容器是以镜像为基础，再加一层容器存储层，组成这样的多层存储结构去运行的。因此该镜像如果被这个容器所依赖的，那么删除必然会导致故障。如果这些容器是不需要的，应该先将它们删除，然后再来删除镜像</p>
+<h3 id="镜像基本原理"><a href="#镜像基本原理" class="headerlink" title="镜像基本原理"></a>镜像基本原理</h3><p>镜像是容器的基础，每次执行 <code>docker run</code> 的时候都会指定哪个镜像作为容器运行的基础。在之前的例子中，我们所使用的都是来自于 Docker Hub 的镜像。直接使用这些镜像是可以满足一定的需求，而当这些镜像无法直接满足需求时，我们就需要定制这些镜像。接下来的几节就将讲解如何定制镜像</p>
+<p>回顾一下之前我们学到的知识，镜像是多层存储，每一层是在前一层的基础上进行的修改；而容器同样也是多层存储，是在以镜像为基础层，在其基础上加一层作为容器运行时的存储层</p>
+<p>当我们运行一个容器的时候（如果不使用卷的话），我们做的任何文件修改都会被记录于容器存储层里。而 Docker 提供了一个 <code>docker commit</code> 命令，<strong>可以将容器的存储层保存下来成为镜像</strong>。换句话说，就是在原有镜像的基础上，再叠加上容器的存储层，并构成新的镜像。以后我们运行这个新镜像的时候，就会拥有原有容器最后的文件变化。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker commit [选项] &lt;容器ID或容器名&gt; [&lt;仓库名&gt;[:&lt;标签&gt;]]</span><br><span class="line">$ docker commit \</span><br><span class="line">    --author &quot;Tao Wang &lt;twang2218@gmail.com&gt;&quot; \</span><br><span class="line">    --message &quot;修改了默认网页&quot; \</span><br><span class="line">    webserver \</span><br><span class="line">    nginx:v2</span><br><span class="line">sha256:07e33465974800ce65751acc279adc6ed2dc5ed4e0838f8b86f0c87aa1795214</span><br></pre></td></tr></table></figure>
+<p>使用 <code>docker commit</code> 命令虽然可以比较直观的帮助理解镜像分层存储的概念，<strong>但是实际环境中并不会这样使用</strong></p>
+<p>回顾之前提及的镜像所使用的分层存储的概念，除当前层外，之前的每一层都是不会发生改变的，换句话说，<strong>任何修改的结果仅仅是在当前层进行标记、添加、修改，而不会改动上一层</strong>。如果使用 <code>docker commit</code> 制作镜像，以及后期修改的话，每一次修改都会让镜像更加臃肿一次，所删除的上一层的东西并不会丢失，会一直如影随形的跟着这个镜像，即使根本无法访问到。这会让镜像更加臃肿</p>
+<h3 id="×使用-Dockerfile-定制镜像"><a href="#×使用-Dockerfile-定制镜像" class="headerlink" title="×使用 Dockerfile 定制镜像"></a>×使用 Dockerfile 定制镜像</h3><h2 id="Using-Container"><a href="#Using-Container" class="headerlink" title="Using Container"></a>Using Container</h2><p>简单的说，容器是独立运行的一个或一组应用，以及它们的运行态环境。对应的，虚拟机可以理解为模拟运行的一整套操作系统（提供了运行态环境和其他系统环境）和跑在上面的应用</p>
+<h3 id="启动容器"><a href="#启动容器" class="headerlink" title="启动容器"></a>启动容器</h3><p>启动容器有两种方式，一种是基于镜像新建一个容器并启动，另外一个是将在终止状态（<code>stopped</code>）的容器重新启动。因为 Docker 的容器实在太轻量级了，很多时候用户都是随时删除和新创建容器</p>
+<p><strong>新建并启动</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run ubuntu:18.04 /bin/echo &apos;Hello world&apos;</span><br></pre></td></tr></table></figure>
+<p>当利用 <code>docker run</code> 来创建容器时，Docker 在后台运行的标准操作包括：</p>
+<ul>
+<li>检查本地是否存在指定的镜像，不存在就从公有仓库下载</li>
+<li>利用镜像创建并启动一个容器</li>
+<li>分配一个文件系统，并在只读的镜像层外面挂载一层可读写层</li>
+<li>从宿主主机配置的网桥接口中桥接一个虚拟接口到容器中去</li>
+<li>从地址池配置一个 ip 地址给容器</li>
+<li>执行用户指定的应用程序</li>
+<li>执行完毕后容器被终止</li>
+</ul>
+<p><strong>启动已终止容器</strong></p>
+<p>可以利用 <code>docker container start</code> 命令，直接将一个已经终止的容器启动运行</p>
+<p>注意：<strong>容器的核心为所执行的应用程序，所需要的资源都是应用程序运行所必需的。除此之外，并没有其它的资源</strong>。可以在伪终端中利用 <code>ps</code> 或 <code>top</code> 来查看进程信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">root@ba267838cc1b:/<span class="comment"># ps</span></span><br><span class="line">  PID TTY          TIME CMD</span><br><span class="line">    1 ?        00:00:00 bash</span><br><span class="line">   11 ?        00:00:00 ps</span><br></pre></td></tr></table></figure>
+<p>可见，容器中仅运行了指定的 bash 应用。<strong>这种特点使得 Docker 对资源的利用率极高，是货真价实的轻量级虚拟化</strong></p>
+<h3 id="后台运行"><a href="#后台运行" class="headerlink" title="后台运行"></a>后台运行</h3><p>更多的时候，需要让 Docker 在后台运行而不是直接把执行命令的结果输出在当前宿主机下。此时，可以通过添加 <code>-d</code> 参数来实现</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -d ubuntu:18.04 /bin/sh -c <span class="string">"while true; do echo hello world; sleep 1; done"</span></span><br><span class="line">77b2dc01fe0f3f1265df143181e7b9af5e05279a884f4776ee75350ea9d8017a</span><br></pre></td></tr></table></figure>
+<p>要获取容器的输出信息，可以通过 <code>docker container logs</code> 命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ docker container logs [container ID or NAMES]</span><br><span class="line">hello world</span><br><span class="line">hello world</span><br><span class="line">hello world</span><br><span class="line">. . .</span><br></pre></td></tr></table></figure>
+<h3 id="终止容器"><a href="#终止容器" class="headerlink" title="终止容器"></a>终止容器</h3><p>可以使用 <code>docker container stop</code> 来终止一个运行中的容器，此外，当 Docker 容器中指定的应用终结时，容器也自动终止</p>
+<p>终止状态的容器可以用 <code>docker container ls -a</code> 命令看到</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker container ls -a</span><br><span class="line">CONTAINER ID        IMAGE                    COMMAND                CREATED             STATUS                          PORTS               NAMES</span><br><span class="line">ba267838cc1b        ubuntu:18.04             <span class="string">"/bin/bash"</span>            30 minutes ago      Exited (0) About a minute ago                       trusting_newton</span><br><span class="line">98e5efa7d997        training/webapp:latest   <span class="string">"python app.py"</span>        About an hour ago   Exited (0) 34 minutes ago                           backstabbing_pike</span><br></pre></td></tr></table></figure>
+<ul>
+<li>处于终止状态的容器，可以通过 <code>docker container start</code> 命令来重新启动</li>
+<li>此外，<code>docker container restart</code> 命令会将一个运行态的容器终止，然后再重新启动它</li>
+</ul>
+<h3 id="进入容器"><a href="#进入容器" class="headerlink" title="进入容器"></a>进入容器</h3><p>某些时候需要进入容器进行操作，包括使用 <code>docker attach</code> 命令或 <code>docker exec</code> 命令，推荐大家使用 <code>docker exec</code> 命令</p>
+<p><code>attach</code> 命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -dit ubuntu</span><br><span class="line">243c32535da7d142fb0e6df616a3c3ada0b8ab417937c853a9e1c251f499f550</span><br><span class="line"></span><br><span class="line">$ docker container ls</span><br><span class="line">CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES</span><br><span class="line">243c32535da7        ubuntu:latest       <span class="string">"/bin/bash"</span>         18 seconds ago      Up 17 seconds                           nostalgic_hypatia</span><br><span class="line"></span><br><span class="line">$ docker attach 243c</span><br><span class="line">root@243c32535da7:/<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+<p>注意： 如果从这个 stdin 中 exit，会导致容器的停止</p>
+<p><code>exec</code> 命令</p>
+<p><code>docker exec</code> 后边可以跟多个参数，这里主要说明 <code>-i</code> <code>-t</code> 参数。</p>
+<ul>
+<li>只用 <code>-i</code> 参数时，由于没有分配伪终端，界面没有我们熟悉的 Linux 命令提示符，但命令执行结果仍然可以返回。</li>
+<li>当 <code>-i</code> <code>-t</code> 参数一起使用时，则可以看到我们熟悉的 Linux 命令提示符</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -dit ubuntu</span><br><span class="line">69d137adef7a8a689cbcb059e94da5489d3cddd240ff675c640c8d96e84fe1f6</span><br><span class="line"></span><br><span class="line">$ docker container ls</span><br><span class="line">CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES</span><br><span class="line">69d137adef7a        ubuntu:latest       <span class="string">"/bin/bash"</span>         18 seconds ago      Up 17 seconds                           zealous_swirles</span><br><span class="line"></span><br><span class="line">$ docker <span class="built_in">exec</span> -i 69d1 bash</span><br><span class="line">ls</span><br><span class="line">bin</span><br><span class="line">boot</span><br><span class="line">dev</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">$ docker <span class="built_in">exec</span> -it 69d1 bash</span><br><span class="line">root@69d137adef7a:/<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+<p>注意：如果从这个 stdin 中 exit，不会导致容器的停止。这就是为什么推荐大家使用 <code>docker exec</code> 的原因</p>
+<h3 id="导入和导出容器"><a href="#导入和导出容器" class="headerlink" title="导入和导出容器"></a>导入和导出容器</h3><p>如果要导出本地某个容器，可以使用 <code>docker export</code> 命令，这样将导出<strong>容器快照</strong>到本地文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ docker container ls -a</span><br><span class="line">CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                    PORTS               NAMES</span><br><span class="line">7691a814370e        ubuntu:18.04        <span class="string">"/bin/bash"</span>         36 hours ago        Exited (0) 21 hours ago                       <span class="built_in">test</span></span><br><span class="line">$ docker <span class="built_in">export</span> 7691a814370e &gt; ubuntu.tar</span><br></pre></td></tr></table></figure>
+<p>可以使用 <code>docker import</code> 从容器快照文件中再导入为镜像</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ cat ubuntu.tar | docker import - <span class="built_in">test</span>/ubuntu:v1.0</span><br><span class="line">$ docker image ls</span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED              VIRTUAL SIZE</span><br><span class="line"><span class="built_in">test</span>/ubuntu         v1.0                9d37a6082e97        About a minute ago   171.3 MB</span><br></pre></td></tr></table></figure>
+<p>此外，也可以通过指定 URL 或者某个目录来导入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker import http://example.com/exampleimage.tgz example/imagerepo</span><br></pre></td></tr></table></figure>
+<p>注意：用户既可以使用 docker load 来导入镜像存储文件到本地镜像库，也可以使用 docker import 来导入一个容器快照到本地镜像库。这两者的区别在于<strong>容器快照文件将丢弃所有的历史记录和元数据信息</strong>（<strong>即仅保存容器当时的快照状态</strong>），而镜像存储文件将保存完整记录，体积也要大。此外，从容器快照文件导入时可以重新指定标签等元数据信息</p>
+<h3 id="删除容器"><a href="#删除容器" class="headerlink" title="删除容器"></a>删除容器</h3><p>可以使用 <code>docker container rm</code> 来删除一个处于终止状态的容器</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ docker container rm  trusting_newton</span><br><span class="line">trusting_newton</span><br></pre></td></tr></table></figure>
+<p>如果要删除一个运行中的容器，可以添加 <code>-f</code> 参数。Docker 会发送 <code>SIGKILL</code> 信号给容器</p>
+<p>用 <code>docker container ls -a</code> 命令可以查看所有已经创建的包括终止状态的容器，如果数量太多要一个个删除可能会很麻烦，用下面的命令可以清理掉所有处于终止状态的容器</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker container prune</span><br></pre></td></tr></table></figure>
+<h2 id="Using-Repository"><a href="#Using-Repository" class="headerlink" title="Using Repository"></a>Using Repository</h2><p>仓库（<code>Repository</code>）是集中存放镜像的地方，注册服务器（<code>Registry</code>）是管理仓库的具体服务器，每个服务器上可以有多个仓库，而每个仓库下面有多个镜像。</p>
+<p>从这方面来说，仓库可以被认为是一个具体的项目或目录。例如对于仓库地址 <code>dl.dockerpool.com/ubuntu</code> 来说，<code>dl.dockerpool.com</code> 是注册服务器地址，<code>ubuntu</code> 是仓库名</p>
+<h3 id="Docker-Hub"><a href="#Docker-Hub" class="headerlink" title="Docker Hub"></a>Docker Hub</h3><p>注册 —》登录 —》拉取 / 推送</p>
+<p><strong>登录</strong></p>
+<p>可以通过执行 <code>docker login</code> 命令交互式的输入用户名及密码来完成在命令行界面登录 Docker Hub，你可以通过 <code>docker logout</code> 退出登录</p>
+<p><strong>拉取</strong></p>
+<p>你可以通过 <code>docker search</code> 命令来查找官方仓库中的镜像，并利用 <code>docker pull</code>命令来将它下载到本地</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ docker search centos</span><br><span class="line">NAME                                            DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED</span><br><span class="line">centos                                          The official build of CentOS.                   465       [OK]</span><br><span class="line">tianon/centos                                   CentOS 5 and 6, created using rinse instea...   28</span><br><span class="line">blalor/centos                                   Bare-bones base CentOS 6.5 image                6                    [OK]</span><br><span class="line">saltstack/centos-6-minimal                                                                      6                    [OK]</span><br><span class="line">tutum/centos-6.4                                DEPRECATED. Use tutum/centos:6.4 instead. ...   5                    [OK]</span><br></pre></td></tr></table></figure>
+<p>可以看到返回了很多包含关键字的镜像，其中包括镜像名字、描述、收藏数（表示该镜像的受关注程度）、是否官方创建、是否自动创建。</p>
+<p>官方的镜像说明是官方项目组创建和维护的，automated 资源允许用户验证镜像的来源和内容。</p>
+<p>根据是否是官方提供，可将镜像资源分为两类。</p>
+<p>一种是类似 <code>centos</code> 这样的镜像，被称为基础镜像或根镜像。这些基础镜像由 Docker 公司创建、验证、支持、提供。这样的镜像往往使用单个单词作为名字。</p>
+<p>还有一种类型，比如 <code>tianon/centos</code> 镜像，它是由 Docker 的用户创建并维护的，往往带有用户名称前缀。可以通过前缀 <code>username/</code> 来指定使用某个用户提供的镜像，比如 tianon 用户。</p>
+<p>另外，在查找的时候通过 <code>--filter=stars=N</code> 参数可以指定仅显示收藏数量为 <code>N</code> 以上的镜像</p>
+<p><strong>下载</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ docker pull centos</span><br><span class="line">Pulling repository centos</span><br><span class="line">0b443ba03958: Download complete</span><br><span class="line">539c0211cd76: Download complete</span><br><span class="line">511136ea3c5a: Download complete</span><br><span class="line">7064731afe90: Download complete</span><br></pre></td></tr></table></figure>
+<p><strong>推送</strong></p>
+<p>用户也可以在登录后通过 <code>docker push</code> 命令来将自己的镜像推送到 Docker Hub。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ docker tag ubuntu:18.04 username/ubuntu:18.04</span><br><span class="line"></span><br><span class="line">$ docker image ls</span><br><span class="line"></span><br><span class="line">REPOSITORY                                               TAG                    IMAGE ID            CREATED             SIZE</span><br><span class="line">ubuntu                                                   18.04                  275d79972a86        6 days ago          94.6MB</span><br><span class="line">username/ubuntu                                          18.04                  275d79972a86        6 days ago          94.6MB</span><br><span class="line"></span><br><span class="line">$ docker push username/ubuntu:18.04</span><br><span class="line"></span><br><span class="line">$ docker search username</span><br><span class="line"></span><br><span class="line">NAME                      DESCRIPTION                                     STARS               OFFICIAL            AUTOMATED</span><br><span class="line">username/ubuntu</span><br></pre></td></tr></table></figure>
+<p><strong>自动创建</strong></p>
+<p>自动创建（Automated Builds）功能对于需要经常升级镜像内程序来说，十分方便。</p>
+<p>有时候，用户创建了镜像，安装了某个软件，如果软件发布新版本则需要手动更新镜像。</p>
+<p>而自动创建允许用户通过 Docker Hub 指定跟踪一个目标网站（目前支持 <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a> 或 <a href="https://bitbucket.org/" target="_blank" rel="noopener">BitBucket</a>）上的项目，一旦项目发生新的提交或者创建新的标签（tag），Docker Hub 会自动构建镜像并推送到 Docker Hub 中</p>
+<p>要配置自动创建，包括如下的步骤：</p>
+<ul>
+<li>创建并登录 Docker Hub，以及目标网站；</li>
+<li>在目标网站中连接帐户到 Docker Hub；</li>
+<li>在 Docker Hub 中 <a href="https://registry.hub.docker.com/builds/add/" target="_blank" rel="noopener">配置一个自动创建</a>；</li>
+<li>选取一个目标网站中的项目（需要含 <code>Dockerfile</code>）和分支；</li>
+<li>指定 <code>Dockerfile</code> 的位置，并提交创建。</li>
+</ul>
+<p>之后，可以在 Docker Hub 的 <a href="https://registry.hub.docker.com/builds/" target="_blank" rel="noopener">自动创建页面</a> 中跟踪每次创建的状态</p>
+<h3 id="×私有仓库"><a href="#×私有仓库" class="headerlink" title="×私有仓库"></a>×私有仓库</h3><h2 id="Docker-数据管理"><a href="#Docker-数据管理" class="headerlink" title="Docker 数据管理"></a>Docker 数据管理</h2><p>这一章介绍如何在 Docker 内部以及容器之间管理数据，在容器中管理数据主要有两种方式：</p>
+<ul>
+<li>数据卷（Volumes）</li>
+<li>挂载主机目录 (Bind mounts)</li>
+</ul>
+<p><img src="/2019/03/12/docker/../../../../media/super/Dev%20Data/SuperNoteBook/Docker/assets/types-of-mounts.png" alt="img"></p>
+<h3 id="数据卷"><a href="#数据卷" class="headerlink" title="数据卷"></a>数据卷</h3><p><code>数据卷</code> 是一个可供一个或多个容器使用的特殊目录，它绕过 UFS，可以提供很多有用的特性：</p>
+<ul>
+<li><code>数据卷</code> 可以在容器之间共享和重用</li>
+<li>对 <code>数据卷</code> 的修改会立马生效</li>
+<li>对 <code>数据卷</code> 的更新，不会影响镜像</li>
+<li><code>数据卷</code> 默认会一直存在，即使容器被删除</li>
+</ul>
+<p>注意：<code>数据卷</code> 的使用，类似于 Linux 下对目录或文件进行 mount，镜像中的被指定为挂载点的目录中的文件会隐藏掉，能显示看的是挂载的 <code>数据卷</code></p>
+<p><strong>创建一个数据卷</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker volume create my-vol</span><br></pre></td></tr></table></figure>
+<p><strong>查看所有的数据卷</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ docker volume ls</span><br><span class="line"></span><br><span class="line"><span class="built_in">local</span>               my-vol</span><br></pre></td></tr></table></figure>
+<p><strong>查看指定数据卷的信息</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker volume inspect my-vol</span><br></pre></td></tr></table></figure>
+<p><strong>启动一个挂载数据卷的容器</strong></p>
+<p>在用 <code>docker run</code> 命令的时候，使用 <code>--mount</code> 标记来将 <code>数据卷</code> 挂载到容器里。在一次 <code>docker run</code> 中可以挂载多个 <code>数据卷</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -d -P --name web \</span><br><span class="line">    <span class="comment"># -v my-vol:/wepapp \</span></span><br><span class="line">    --mount <span class="built_in">source</span>=my-vol,target=/webapp \</span><br><span class="line">    training/webapp \</span><br><span class="line">    python app.py</span><br></pre></td></tr></table></figure>
+<p><strong>查看数据卷的具体信息</strong></p>
+<p>在主机里使用以下命令可以查看 <code>web</code> 容器的信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker inspect web</span><br></pre></td></tr></table></figure>
+<p><strong>删除数据卷</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker volume rm my-vol</span><br></pre></td></tr></table></figure>
+<p><code>数据卷</code> 是被设计用来持久化数据的，它的生命周期独立于容器，Docker 不会在容器被删除后自动删除 <code>数据卷</code>，并且也不存在垃圾回收这样的机制来处理没有任何容器引用的 <code>数据卷</code>。如果需要在删除容器的同时移除数据卷。可以在删除容器的时候使用 <code>docker rm -v</code> 这个命令</p>
+<p>无主的数据卷可能会占据很多空间，要清理请使用以下命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker volume prune</span><br></pre></td></tr></table></figure>
+<h3 id="挂载主机目录"><a href="#挂载主机目录" class="headerlink" title="挂载主机目录"></a>挂载主机目录</h3><p><strong>挂载一个主机目录作为数据卷</strong></p>
+<p>使用 <code>--mount</code> 标记可以指定挂载一个本地主机的目录到容器中去</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -d -P \</span><br><span class="line">    --name web \</span><br><span class="line">    <span class="comment"># -v /src/webapp:/opt/webapp \</span></span><br><span class="line">    --mount <span class="built_in">type</span>=<span class="built_in">bind</span>,<span class="built_in">source</span>=/src/webapp,target=/opt/webapp \</span><br><span class="line">    training/webapp \</span><br><span class="line">    python app.py</span><br></pre></td></tr></table></figure>
+<p>上面的命令加载主机的 <code>/src/webapp</code> 目录到容器的 <code>/opt/webapp</code>目录。这个功能在进行测试的时候十分方便，比如用户可以放置一些程序到本地目录中，来查看容器是否正常工作。本地目录的路径必须是绝对路径，以前使用 <code>-v</code> 参数时如果本地目录不存在 Docker 会自动为你创建一个文件夹，现在使用 <code>--mount</code> 参数时如果本地目录不存在，Docker 会报错</p>
+<p>Docker 挂载主机目录的默认权限是 <code>读写</code>，用户也可以通过增加 <code>readonly</code> 指定为 <code>只读</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -d -P \</span><br><span class="line">    --name web \</span><br><span class="line">    <span class="comment"># -v /src/webapp:/opt/webapp:ro \</span></span><br><span class="line">    --mount <span class="built_in">type</span>=<span class="built_in">bind</span>,<span class="built_in">source</span>=/src/webapp,target=/opt/webapp,<span class="built_in">readonly</span> \</span><br><span class="line">    training/webapp \</span><br><span class="line">    python app.py</span><br></pre></td></tr></table></figure>
+<p><strong>挂载一个本地主机文件作为数据卷</strong></p>
+<p><code>--mount</code> 标记也可以从主机挂载单个文件到容器中</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ docker run --rm -it \</span><br><span class="line">   <span class="comment"># -v $HOME/.bash_history:/root/.bash_history \</span></span><br><span class="line">   --mount <span class="built_in">type</span>=<span class="built_in">bind</span>,<span class="built_in">source</span>=<span class="variable">$HOME</span>/.bash_history,target=/root/.bash_history \</span><br><span class="line">   ubuntu:18.04 \</span><br><span class="line">   bash</span><br><span class="line"></span><br><span class="line">root@2affd44b4667:/<span class="comment"># history</span></span><br><span class="line">1  ls</span><br><span class="line">2  diskutil list</span><br></pre></td></tr></table></figure>
+<ul>
+<li>这样就可以记录在容器输入过的命令了</li>
+</ul>
+<h2 id="Docker-使用网络"><a href="#Docker-使用网络" class="headerlink" title="Docker 使用网络"></a>Docker 使用网络</h2><p>Docker 允许通过外部访问容器或容器互联的方式来提供网络服务</p>
+<h3 id="外部访问容器"><a href="#外部访问容器" class="headerlink" title="外部访问容器"></a>外部访问容器</h3><p>容器中可以运行一些网络应用，要让外部也可以访问这些应用，可以通过 <code>-P</code> 或 <code>-p</code>参数来指定端口映射</p>
+<p><strong>随机映射</strong></p>
+<p>当使用 <code>-P</code> 标记时，Docker 会随机映射一个 <code>49000~49900</code> 的端口到内部容器开放的网络端口</p>
+<p>使用 <code>docker container ls</code> 可以看到，本地主机的 49155 被映射到了容器的 5000 端口。此时访问本机的 49155 端口即可访问容器内 web 应用提供的界面</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -d -P training/webapp python app.py</span><br></pre></td></tr></table></figure>
+<p><strong>指定地址的指定端口</strong></p>
+<p><code>-p</code> 则可以指定要映射的端口，并且，在一个指定端口上只可以绑定一个容器。可以使用 <code>ip:hostPort:containerPort</code> 格式指定映射使用一个特定地址，比如 localhost 地址 127.0.0.1</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -d -p 5000:5000 training/webapp python app.py</span><br></pre></td></tr></table></figure>
+<p><strong>指定地址的任意端口</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -d -p 127.0.0.1::5000 training/webapp python app.py</span><br></pre></td></tr></table></figure>
+<ul>
+<li>容器有自己的内部网络和 ip 地址（使用 <code>docker inspect</code> 可以获取所有的变量，Docker 还可以有一个可变的网络配置。）</li>
+<li><code>-p</code> 标记可以多次使用来绑定多个端口</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -d -p 5000:5000 -p 3000:80 training/webapp python app.py</span><br></pre></td></tr></table></figure>
+<h3 id="容器互联"><a href="#容器互联" class="headerlink" title="容器互联"></a>容器互联</h3><p>如果你之前有 <code>Docker</code> 使用经验，你可能已经习惯了使用 <code>--link</code> 参数来使容器互联。随着 Docker 网络的完善，强烈<strong>建议大家将容器加入自定义的 Docker 网络来连接多个容器</strong>，而不是使用 <code>--link</code> 参数</p>
+<p><strong>新建网络</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker network create -d bridge my-net</span><br></pre></td></tr></table></figure>
+<p><code>-d</code> 参数指定 Docker 网络类型，有 <code>bridge</code> <code>overlay</code>。其中 <code>overlay</code> 网络类型用于 Swarm mode</p>
+<p><strong>连接容器</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -it --rm --name busybox1 --network my-net busybox sh</span><br><span class="line">$ docker run -it --rm --name busybox2 --network my-net busybox sh</span><br></pre></td></tr></table></figure>
+<p><strong>连接测试</strong></p>
+<p>下面通过 <code>ping</code> 来证明 <code>busybox1</code> 容器和 <code>busybox2</code> 容器建立了互联关系</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/ <span class="comment"># ping busybox2</span></span><br><span class="line">PING busybox2 (172.19.0.3): 56 data bytes</span><br><span class="line">64 bytes from 172.19.0.3: seq=0 ttl=64 time=0.072 ms</span><br><span class="line">64 bytes from 172.19.0.3: seq=1 ttl=64 time=0.118 ms</span><br></pre></td></tr></table></figure>
+<p>注意：如果你有多个容器之间需要互相连接，推荐使用 Docker Compose</p>
+<h3 id="配置容器的-DNS"><a href="#配置容器的-DNS" class="headerlink" title="配置容器的 DNS"></a>配置容器的 DNS</h3><p>如何自定义配置容器的主机名和 DNS 呢？秘诀就是 Docker 利用虚拟文件来挂载容器的 3 个相关配置文件</p>
+<p>在容器中使用 <code>mount</code> 命令可以看到挂载信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ mount</span><br><span class="line">/dev/disk/by-uuid/1fec...ebdf on /etc/hostname <span class="built_in">type</span> ext4 ...</span><br><span class="line">/dev/disk/by-uuid/1fec...ebdf on /etc/hosts <span class="built_in">type</span> ext4 ...</span><br><span class="line">tmpfs on /etc/resolv.conf <span class="built_in">type</span> tmpfs ...</span><br></pre></td></tr></table></figure>
+<p>这种机制可以让宿主主机 DNS 信息发生更新后，所有 Docker 容器的 DNS 配置通过 <code>/etc/resolv.conf</code> 文件立刻得到更新</p>
+<p>配置全部容器的 DNS ，也可以在 <code>/etc/docker/daemon.json</code> 文件中增加以下内容来设置</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"dns"</span> : [</span><br><span class="line">    <span class="string">"114.114.114.114"</span>,</span><br><span class="line">    <span class="string">"8.8.8.8"</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样每次启动的容器 DNS 自动配置为 <code>114.114.114.114</code> 和 <code>8.8.8.8</code>。使用以下命令来证明其已经生效</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -it --rm ubuntu:18.04  cat etc/resolv.conf</span><br><span class="line"></span><br><span class="line">nameserver 114.114.114.114</span><br><span class="line">nameserver 8.8.8.8</span><br></pre></td></tr></table></figure>
+<p>如果用户想要手动指定容器的配置，可以在使用 <code>docker run</code> 命令启动容器时加入如下参数：</p>
+<p><code>-h HOSTNAME</code> 或者 <code>--hostname=HOSTNAME</code> 设定容器的主机名，它会被写到容器内的 <code>/etc/hostname</code> 和 <code>/etc/hosts</code>。但它在容器外部看不到，既不会在 <code>docker container ls</code> 中显示，也不会在其他的容器的 <code>/etc/hosts</code> 看到。</p>
+<p><code>--dns=IP_ADDRESS</code> 添加 DNS 服务器到容器的 <code>/etc/resolv.conf</code> 中，让容器用这个服务器来解析所有不在 <code>/etc/hosts</code> 中的主机名。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--dns-search=DOMAIN` 设定容器的搜索域，当设定搜索域为 `.example.com` 时，在搜索一个名为 host 的主机时，DNS 不仅搜索 host，还会搜索 `host.example.com</span><br></pre></td></tr></table></figure>
+<p>注意：如果在容器启动时没有指定最后两个参数，Docker 会默认用主机上的 <code>/etc/resolv.conf</code> 来配置容器</p>
+<h3 id="×高级网络配置"><a href="#×高级网络配置" class="headerlink" title="×高级网络配置"></a>×高级网络配置</h3><p>Docker 的互联机制：</p>
+<ol>
+<li>当 Docker 启动时，会自动在主机上创建一个 <code>docker0</code> 虚拟网桥，实际上是 Linux 的一个 bridge，可以理解为一个软件交换机。它会在挂载到它的网口之间进行转发</li>
+<li>同时，Docker 随机分配一个本地未占用的私有网段（在 <a href="https://tools.ietf.org/html/rfc1918" target="_blank" rel="noopener">RFC1918</a> 中定义）中的一个地址给 <code>docker0</code> 接口。比如典型的 <code>172.17.42.1</code>，掩码为 <code>255.255.0.0</code>。此后启动的容器内的网口也会自动分配一个同一网段（<code>172.17.0.0/16</code>）的地址</li>
+<li>当创建一个 Docker 容器的时候，同时会创建了一对 <code>veth pair</code> 接口（当数据包发送到一个接口时，另外一个接口也可以收到相同的数据包）。这对接口一端在容器内，即 <code>eth0</code>；另一端在本地并被挂载到 <code>docker0</code> 网桥，名称以 <code>veth</code> 开头（例如 <code>vethAQI2QT</code>）。通过这种方式，主机可以跟容器通信，容器之间也可以相互通信。Docker 就创建了在主机和所有容器之间一个虚拟共享网络</li>
+</ol>
+<p><img src="/2019/03/12/docker/../../../../media/super/Dev%20Data/SuperNoteBook/Docker/assets/network.png" alt="Docker 网络"></p>
+<h2 id="Docker-Compose"><a href="#Docker-Compose" class="headerlink" title="Docker Compose"></a>Docker Compose</h2><p><code>Compose</code> 项目是 Docker 官方的开源项目，负责实现对 Docker 容器集群的快速编排。从功能上看，跟 <code>OpenStack</code> 中的 <code>Heat</code> 十分类似。<code>Compose</code> 定位是 「定义和运行多个 Docker 容器的应用（Defining and running multi-container Docker applications）」，其前身是开源项目 Fig</p>
+<p>通过第一部分中的介绍，我们知道使用一个 <code>Dockerfile</code> 模板文件，可以让用户很方便的定义一个单独的应用容器。然而，在日常工作中，经常会碰到需要多个容器相互配合来完成某项任务的情况。例如要实现一个 Web 项目，除了 Web 服务容器本身，往往还需要再加上后端的数据库服务容器，甚至还包括负载均衡容器等。</p>
+<p><code>Compose</code> 恰好满足了这样的需求。它允许用户通过一个单独的 <code>docker-compose.yml</code> 模板文件（YAML 格式）来定义一组相关联的应用容器为一个项目（project）</p>
+<p><code>Compose</code> 中有两个重要的概念：</p>
+<ul>
+<li>服务 (<code>service</code>)：一个应用的容器，实际上可以包括若干运行相同镜像的容器实例。</li>
+<li>项目 (<code>project</code>)：由一组关联的应用容器组成的一个完整业务单元，在 <code>docker-compose.yml</code> 文件中定义</li>
+</ul>
+<p><code>Compose</code> 的默认管理对象是项目，通过子命令对项目中的一组容器进行便捷地生命周期管理</p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><ul>
+<li>服务 (<code>service</code>)：一个应用容器，实际上可以运行多个相同镜像的实例。</li>
+<li>项目 (<code>project</code>)：由一组关联的应用容器组成的一个完整业务单元</li>
+</ul>
+<p>最常见的项目是 web 网站，该项目应该包含 web 应用和缓存。下面我们用 <code>Python</code> 来建立一个能够记录页面访问次数的 web 网站</p>
+<p>web 应用 —》Dockerfile —》docker-compose.yml —》运行 compose </p>
+<p><strong>编写 Dockerfile</strong></p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> python:<span class="number">3.6</span>-alpine</span><br><span class="line"><span class="keyword">ADD</span><span class="bash"> . /code</span></span><br><span class="line"><span class="bash">WORKDIR /code</span></span><br><span class="line"><span class="bash">RUN pip install redis flask</span></span><br><span class="line"><span class="bash">CMD [<span class="string">"python"</span>, <span class="string">"app.py"</span>]</span></span><br></pre></td></tr></table></figure>
+<p><strong>编写 docker-compose.yml</strong></p>
+<p>编写 <code>docker-compose.yml</code> 文件，这个是 Compose 使用的主模板文件</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'3'</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line"></span><br><span class="line"><span class="attr">  web:</span></span><br><span class="line"><span class="attr">    build:</span> <span class="string">.</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">     -</span> <span class="string">"5000:5000"</span></span><br><span class="line"></span><br><span class="line"><span class="attr">  redis:</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">"redis:alpine"</span></span><br></pre></td></tr></table></figure>
+<p><strong>运行</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker-compose up</span><br></pre></td></tr></table></figure>
+<h3 id="×命令说明"><a href="#×命令说明" class="headerlink" title="×命令说明"></a>×命令说明</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose [-f=&lt;arg&gt;...] [options] [COMMAND] [ARGS...]</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>-f, --file FILE</code> 指定使用的 Compose 模板文件，默认为 <code>docker-compose.yml</code>，可以多次指定。</li>
+<li><code>-p, --project-name NAME</code> 指定项目名称，默认将使用所在目录名称作为项目名。</li>
+<li><code>--x-networking</code> 使用 Docker 的可拔插网络后端特性</li>
+<li><code>--x-network-driver DRIVER</code> 指定网络后端的驱动，默认为 <code>bridge</code></li>
+<li><code>--verbose</code> 输出更多调试信息。</li>
+<li><code>-v, --version</code> 打印版本并退出</li>
+</ul>
+<h3 id="×compose-模板文件"><a href="#×compose-模板文件" class="headerlink" title="×compose 模板文件"></a>×compose 模板文件</h3><h2 id="Docker-Machine"><a href="#Docker-Machine" class="headerlink" title="Docker Machine"></a>Docker Machine</h2><p>Docker Machine 是 Docker 官方编排（Orchestration）项目之一，负责在多种平台上快速安装 Docker 环境。Docker Machine 支持多种后端驱动，包括虚拟机、本地主机和云平台等。</p>
+<h2 id="Docker-Swarm"><a href="#Docker-Swarm" class="headerlink" title="Docker Swarm"></a>Docker Swarm</h2><h3 id="Swarm-的基本概念"><a href="#Swarm-的基本概念" class="headerlink" title="Swarm 的基本概念"></a>Swarm 的基本概念</h3><p>Docker Swarm 是 Docker 官方三剑客项目之一，提供 Docker 容器集群服务，是 Docker 官方对容器云生态进行支持的核心方案。使用它，用户可以将多个 Docker 主机封装为单个大型的虚拟 Docker 主机，快速打造一套容器云平台</p>
+<p><code>Swarm mode</code> 内置 kv 存储功能，提供了众多的新特性，比如：具有容错能力的去中心化设计、内置服务发现、负载均衡、路由网格、动态伸缩、滚动更新、安全传输等。使得 Docker 原生的 <code>Swarm</code> 集群具备与 Mesos、Kubernetes 竞争的实力</p>
+<p><code>Swarm</code> 是使用 <a href="https://github.com/docker/swarmkit/" target="_blank" rel="noopener"><code>SwarmKit</code></a> 构建的 Docker 引擎内置（原生）的集群管理和编排工具</p>
+<p>使用 <code>Swarm</code> 集群之前需要了解以下几个概念：</p>
+<p><strong>节点</strong></p>
+<p>运行 Docker 的主机可以主动初始化一个 <code>Swarm</code> 集群或者加入一个已存在的 <code>Swarm</code>集群，这样这个运行 Docker 的主机就成为一个 <code>Swarm</code> 集群的节点 (<code>node</code>) </p>
+<p>节点分为管理 (<code>manager</code>) 节点和工作 (<code>worker</code>) 节点。管理节点用于 <code>Swarm</code> 集群的管理，<code>docker swarm</code> 命令基本只能在管理节点执行（节点退出集群命令 <code>docker swarm leave</code> 可以在工作节点执行）。一个 <code>Swarm</code> 集群可以有多个管理节点，但只有一个管理节点可以成为 <code>leader</code>，<code>leader</code> 通过 <code>raft</code> 协议实现</p>
+<p>工作节点是任务执行节点，管理节点将服务 (<code>service</code>) 下发至工作节点执行。管理节点默认也作为工作节点。你也可以通过配置让服务只运行在管理节点</p>
+<p><img src="/2019/03/12/docker/../../../../media/super/Dev%20Data/SuperNoteBook/Docker/assets/swarm-diagram.png" alt="img"></p>
+<p><strong>服务和任务</strong></p>
+<p>任务 （<code>Task</code>）是 <code>Swarm</code> 中的最小的调度单位，目前来说就是一个单一的容器</p>
+<p>服务 （<code>Services</code>） 是指一组任务的集合，服务定义了任务的属性。服务有两种模式：</p>
+<ul>
+<li><code>replicated services</code> 按照一定规则在各个工作节点上运行指定个数的任务。</li>
+<li><code>global services</code> 每个工作节点上运行一个任务</li>
+</ul>
+<p>两种模式通过 <code>docker service create</code> 的 <code>--mode</code> 参数指定</p>
+<p><img src="/2019/03/12/docker/../../../../media/super/Dev%20Data/SuperNoteBook/Docker/assets/services-diagram.png" alt="img"></p>
+<h3 id="×Swarm-的使用"><a href="#×Swarm-的使用" class="headerlink" title="×Swarm 的使用"></a>×Swarm 的使用</h3><h2 id="Docker-安全特性"><a href="#Docker-安全特性" class="headerlink" title="Docker 安全特性"></a>Docker 安全特性</h2><p>评估 Docker 的安全性时，主要考虑三个方面:</p>
+<ul>
+<li>由内核的命名空间和控制组机制提供的容器内在安全</li>
+<li>Docker 程序（特别是服务端）本身的抗攻击性</li>
+<li>内核安全性的加强机制对容器安全性的影响</li>
+</ul>
+<h3 id="内核命名空间"><a href="#内核命名空间" class="headerlink" title="内核命名空间"></a>内核命名空间</h3><p>Docker 容器和 LXC 容器很相似，所提供的安全特性也差不多。当用 <code>docker run</code> 启动一个容器时，在后台 Docker 为容器创建了一个独立的命名空间和控制组集合</p>
+<p>命名空间提供了最基础也是最直接的隔离，在容器中运行的进程不会被运行在主机上的进程和其它容器发现和作用</p>
+<p>每个容器都有自己独有的网络栈，意味着它们不能访问其他容器的 sockets 或接口。不过，如果主机系统上做了相应的设置，容器可以像跟主机交互一样的和其他容器交互。当指定公共端口或使用 links 来连接 2 个容器时，容器就可以相互通信了（<strong>可以根据配置来限制通信的策略</strong>）</p>
+<h3 id="控制组"><a href="#控制组" class="headerlink" title="控制组"></a>控制组</h3><p>控制组是 Linux 容器机制的另外一个关键组件，负责实现资源的审计和限制</p>
+<p>它提供了很多有用的特性；以及确保各个容器可以公平地分享主机的内存、CPU、磁盘 IO 等资源；当然，更重要的是，控制组确保了当容器内的资源使用产生压力时不会连累主机系统</p>
+<p>尽管控制组不负责隔离容器之间相互访问、处理数据和进程，它在防止拒绝服务（DDOS）攻击方面是必不可少的。尤其是在多用户的平台（比如公有或私有的 PaaS）上，控制组十分重要。例如，当某些应用程序表现异常的时候，可以保证一致地正常运行和性能</p>
+<h3 id="服务端防护"><a href="#服务端防护" class="headerlink" title="服务端防护"></a>服务端防护</h3><p>运行一个容器或应用程序的核心是通过 Docker 服务端。Docker 服务的运行目前需要 root 权限，因此其安全性十分关键</p>
+<p>首先，确保只有可信的用户才可以访问 Docker 服务。Docker 允许用户在主机和容器间共享文件夹，同时不需要限制容器的访问权限，这就容易让容器突破资源限制</p>
+<p>最近改进的 Linux 命名空间机制将可以实现使用非 root 用户来运行全功能的容器。这将从根本上解决了容器和主机之间共享文件系统而引起的安全问题</p>
+<p>终极目标是改进 2 个重要的安全特性：</p>
+<ul>
+<li>将容器的 root 用户映射到本地主机上的非 root 用户，减轻容器和主机之间因权限提升而引起的安全问题；</li>
+<li>允许 Docker 服务端在非 root 权限下运行，利用安全可靠的子进程来代理执行需要特权权限的操作。这些子进程将只允许在限定范围内进行操作，例如仅仅负责虚拟网络设定或文件系统管理、配置操作等</li>
+</ul>
+<h3 id="内核能力机制"><a href="#内核能力机制" class="headerlink" title="内核能力机制"></a>内核能力机制</h3><p>能力机制（Capability）是 Linux 内核一个强大的特性，可以提供细粒度的权限访问控制。 Linux 内核自 2.2 版本起就支持能力机制，它将权限划分为更加细粒度的操作能力，既可以作用在进程上，也可以作用在文件上</p>
+<p>默认情况下，Docker 启动的容器被严格限制只允许使用内核的一部分能力</p>
+<p>大部分情况下，容器并不需要“真正的” root 权限，容器只需要少数的能力即可。为了加强安全，容器可以禁用一些没必要的权限</p>
+<p>默认情况下，Docker采用白名单机制，禁用必需功能之外的其它权限。 当然，用户也可以根据自身需求来为 Docker 容器启用额外的权限</p>
+<h3 id="其他安全特性"><a href="#其他安全特性" class="headerlink" title="其他安全特性"></a>其他安全特性</h3><p>除了能力机制之外，还可以利用一些现有的安全机制来增强使用 Docker 的安全性，例如 TOMOYO, AppArmor, SELinux, GRSEC 等。</p>
+<p>Docker 当前默认只启用了能力机制。用户可以采用多种方案来加强 Docker 主机的安全，例如：</p>
+<ul>
+<li>在内核中启用 GRSEC 和 PAX，这将增加很多编译和运行时的安全检查；通过地址随机化避免恶意探测等。并且，启用该特性不需要 Docker 进行任何配置。</li>
+<li>使用一些有增强安全特性的容器模板，比如带 AppArmor 的模板和 Redhat 带 SELinux 策略的模板。这些模板提供了额外的安全特性。</li>
+<li>用户可以自定义访问控制机制来定制安全策略。</li>
+</ul>
+<p>跟其它添加到 Docker 容器的第三方工具一样（比如网络拓扑和文件系统共享），有很多类似的机制，在不改变 Docker 内核情况下就可以加固现有的容器</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>总体来看，Docker 容器还是十分安全的，特别是在容器内不使用 root 权限来运行进程的话。</p>
+<p>另外，用户可以使用现有工具，比如 Apparmor, SELinux, GRSEC 来增强安全性；甚至自己在内核中实现更复杂的安全机制</p>
+<h2 id="Docker-底层实现"><a href="#Docker-底层实现" class="headerlink" title="Docker 底层实现"></a>Docker 底层实现</h2><p>Docker 底层的核心技术包括 Linux 上的命名空间（Namespaces）、控制组（Control groups）、Union 文件系统（Union file systems）和容器格式（Container format）</p>
+<p>传统的虚拟机通过在宿主主机中运行 hypervisor 来模拟一整套完整的硬件环境提供给虚拟机的操作系统。虚拟机系统看到的环境是可限制的，也是彼此隔离的。 这种直接的做法实现了对资源最完整的封装，但很多时候往往意味着系统资源的浪费。 例如，以宿主机和虚拟机系统都为 Linux 系统为例，虚拟机中运行的应用其实可以利用宿主机系统中的运行环境</p>
+<p>在操作系统中，包括内核、文件系统、网络、PID、UID、IPC、内存、硬盘、CPU 等等，所有的资源都是应用进程直接共享的。 要想实现虚拟化，除了要实现对内存、CPU、网络IO、硬盘IO、存储空间等的限制外，还要实现文件系统、网络、PID、UID、IPC等等的相互隔离。 前者相对容易实现一些，后者则需要宿主机系统的深入支持</p>
+<p>随着 Linux 系统对于<strong>命名空间</strong>功能的完善实现，程序员已经可以实现上面的所有需求，让某些进程在彼此隔离的命名空间中运行。<strong>大家虽然都共用一个内核和某些运行时环境（例如一些系统命令和系统库），但是彼此却看不到，都以为系统中只有自己的存在。这种机制就是容器（Container）</strong>，<strong>利用命名空间来做权限的隔离控制，利用 cgroups 来做资源分配</strong></p>
+<h3 id="Docker-基本架构"><a href="#Docker-基本架构" class="headerlink" title="Docker 基本架构"></a>Docker 基本架构</h3><p>Docker 采用了 <code>C/S</code> 架构，包括客户端和服务端。Docker 守护进程 （<code>Daemon</code>）作为服务端接受来自客户端的请求，并处理这些请求（创建、运行、分发容器）</p>
+<p>客户端和服务端既可以运行在一个机器上，也可通过 <code>socket</code> 或者 <code>RESTful API</code> 来进行通信</p>
+<p><img src="/2019/03/12/docker/../../../../media/super/Dev%20Data/SuperNoteBook/Docker/assets/docker_arch.png" alt="Docker 基本架构"></p>
+<ul>
+<li>Docker 守护进程一般在宿主主机后台运行，等待接收来自客户端的消息。</li>
+<li>Docker 客户端则为用户提供一系列可执行命令，用户用这些命令实现跟 Docker 守护进程交互</li>
+</ul>
+<h3 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h3><p>命名空间是 <strong>Linux 内核</strong>一个强大的特性。每个容器都有自己单独的命名空间，运行在其中的应用都像是在独立的操作系统中运行一样。命名空间保证了容器之间彼此互不影响</p>
+<p><strong>PID 命名空间</strong></p>
+<p>不同用户的进程就是通过 pid 命名空间隔离开的，且不同命名空间中可以有相同 pid。所有的 LXC 进程在 Docker 中的父进程为Docker进程，每个 LXC 进程具有不同的命名空间。同时由于允许嵌套，因此可以很方便的实现嵌套的 Docker 容器</p>
+<p><strong>NET 命名空间</strong></p>
+<p>有了 pid 命名空间, 每个命名空间中的 pid 能够相互隔离，但是网络端口还是共享 host 的端口。网络隔离是通过 net 命名空间实现的， 每个 net 命名空间有独立的 网络设备, IP 地址, 路由表, /proc/net 目录。这样每个容器的网络就能隔离开来。Docker 默认采用 veth 的方式，将容器中的虚拟网卡同 host 上的一 个Docker 网桥 docker0 连接在一起</p>
+<p><strong>IPC 命名空间</strong></p>
+<p>容器中进程交互还是采用了 Linux 常见的进程间交互方法(interprocess communication - IPC), 包括信号量、消息队列和共享内存等。然而同 VM 不同的是，容器的进程间交互实际上还是 host 上具有相同 pid 命名空间中的进程间交互，因此需要在 IPC 资源申请时加入命名空间信息，每个 IPC 资源有一个唯一的 32 位 id</p>
+<p><strong>mnt 命名空间</strong></p>
+<p>类似 chroot，将一个进程放到一个特定的目录执行。mnt 命名空间允许不同命名空间的进程看到的文件结构不同，这样每个命名空间 中的进程所看到的文件目录就被隔离开了。同 chroot 不同，每个命名空间中的容器在 /proc/mounts 的信息只包含所在命名空间的 mount point</p>
+<p><strong>uts 命名空间</strong></p>
+<p>UTS(“UNIX Time-sharing System”) 命名空间允许每个容器拥有独立的 hostname 和 domain name, 使其在网络上可以被视作一个独立的节点而非 主机上的一个进程</p>
+<p><strong>user 命名空间</strong></p>
+<p>每个容器可以有不同的用户和组 id, 也就是说可以在容器内用容器内部的用户执行程序而非主机上的用户</p>
+<h3 id="控制组-1"><a href="#控制组-1" class="headerlink" title="控制组"></a>控制组</h3><p>控制组（<a href="https://en.wikipedia.org/wiki/Cgroups" target="_blank" rel="noopener">cgroups</a>）是 Linux 内核的一个特性，主要用来对共享资源进行隔离、限制、审计等。只有能控制分配到容器的资源，才能避免当多个容器同时运行时的对系统资源的竞争。控制组技术最早是由 Google 的程序员在 2006 年提出，Linux 内核自 2.6.24 开始支持。控制组可以提供对容器的内存、CPU、磁盘 IO 等资源的限制和审计管理</p>
+<h3 id="联合文件系统"><a href="#联合文件系统" class="headerlink" title="联合文件系统"></a>联合文件系统</h3><p>联合文件系统（<a href="https://en.wikipedia.org/wiki/UnionFS" target="_blank" rel="noopener">UnionFS</a>）是一种<strong>分层、轻量级并且高性能</strong>的文件系统，它支持对文件系统的修改作为一次提交来一层层的<strong>叠加</strong>，同时可以将不同目录挂载到同一个虚拟文件系统下(unite several directories into a single virtual filesystem)</p>
+<ul>
+<li>联合文件系统是 Docker 镜像的基础。镜像可以通过分层来进行继承，基于基础镜像（没有父镜像），可以制作各种具体的应用镜像</li>
+<li>另外，不同 Docker 容器就可以共享一些基础的文件系统层，同时再加上自己独有的改动层，大大提高了存储的效率</li>
+</ul>
+<p>Docker 目前支持的联合文件系统包括 <code>OverlayFS</code>, <code>AUFS</code>, <code>Btrfs</code>, <code>VFS</code>, <code>ZFS</code> 和 <code>Device Mapper</code></p>
+<h3 id="容器格式"><a href="#容器格式" class="headerlink" title="容器格式"></a>容器格式</h3><p>最初，Docker 采用了 <code>LXC</code> 中的容器格式。从 0.7 版本以后开始去除 LXC，转而使用自行开发的 <a href="https://github.com/docker/libcontainer" target="_blank" rel="noopener">libcontainer</a>，从 1.11 开始，则进一步演进为使用 <a href="https://github.com/opencontainers/runc" target="_blank" rel="noopener">runC</a> 和 <a href="https://containerd.tools/" target="_blank" rel="noopener">containerd</a></p>
+<h3 id="网络实现"><a href="#网络实现" class="headerlink" title="网络实现"></a>网络实现</h3><p>Docker 的网络实现其实就是利用了 Linux 上的网络命名空间和虚拟网络设备（特别是 veth pair）</p>
+<p>首先，要实现网络通信，机器需要至少一个网络接口（物理接口或虚拟接口）来收发数据包；此外，如果不同子网之间要进行通信，需要路由机制</p>
+<p>Docker 中的网络接口默认都是虚拟的接口。<strong>虚拟接口的优势之一是转发效率较高</strong>。 <strong>Linux 通过在内核中进行数据复制来实现虚拟接口之间的数据转发</strong>，发送接口的发送缓存中的数据包被直接复制到接收接口的接收缓存中。对于本地系统和容器内系统看来就像是一个正常的以太网卡，只是它不需要真正同外部网络设备通信，速度要快很多</p>
+<p>Docker 容器网络就利用了这项技术。它在本地主机和容器内分别创建一个虚拟接口，并让它们彼此连通（这样的一对接口叫做 <code>veth pair</code>）</p>
+<h2 id="Docker-项目"><a href="#Docker-项目" class="headerlink" title="Docker 项目"></a>Docker 项目</h2><h3 id="etcd：分布式键值数据库"><a href="#etcd：分布式键值数据库" class="headerlink" title="etcd：分布式键值数据库"></a>etcd：分布式键值数据库</h3><p><code></code>etcd<code>是</code>CoreOS<code>团队于 2013 年 6 月发起的开源项目，它的目标是构建一个高可用的分布式键值（</code>key-value<code>）数据库，基于</code>Go<code>语言实现。我们知道，在分布式系统中，各种服务的配置信息的管理分享，服务的发现是一个很基本同时也是很重要的问题。</code>CoreOS<code>项目就希望基于</code>etcd` 来解决这一问题</p>
+<p>受到 <a href="https://zookeeper.apache.org/" target="_blank" rel="noopener">Apache ZooKeeper</a> 项目和 <a href="https://github.com/ha/doozerd" target="_blank" rel="noopener">doozer</a> 项目的启发，<code>etcd</code> 在设计的时候重点考虑了下面四个要素：</p>
+<ul>
+<li>简单：具有定义良好、面向用户的 <code>API</code> (<a href="https://github.com/grpc/grpc" target="_blank" rel="noopener">gRPC</a>)</li>
+<li>安全：支持 <code>HTTPS</code> 方式的访问</li>
+<li>快速：支持并发 <code>10 k/s</code> 的写操作</li>
+<li>可靠：支持分布式结构，基于 <code>Raft</code> 的一致性算法</li>
+</ul>
+<p><strong>Apache ZooKeeper 是一套知名的分布式系统中进行同步和一致性管理的工具</strong>。</p>
+<p><strong>doozer 是一个一致性分布式数据库</strong>。</p>
+<p><strong>Raft 是一套通过选举主节点来实现分布式系统一致性的算法</strong>，相比于大名鼎鼎的 Paxos 算法，它的过程更容易被人理解，由 Stanford 大学的 Diego Ongaro 和 John Ousterhout 提出。更多细节可以参考 raftconsensus.github.io。</p>
+<p>一般情况下，用户使用 <code>etcd</code> 可以在多个节点上启动多个实例，并添加它们为一个集群。同一个集群中的 <code>etcd</code> 实例将会保持彼此信息的一致性</p>
+<h3 id="CoreOS：基于容器的-OS"><a href="#CoreOS：基于容器的-OS" class="headerlink" title="CoreOS：基于容器的 OS"></a>CoreOS：基于容器的 OS</h3><p>CoreOS 的设计是为你提供能够像谷歌一样的大型互联网公司一样的基础设施管理能力来<strong>动态扩展和管理的计算能力</strong></p>
+<p>CoreOS 的安装文件和运行依赖非常小,它提供了精简的 Linux 系统。它使用 Linux 容器在更高的抽象层来管理你的服务，而不是通过常规的 YUM 和 APT 来安装包。</p>
+<p>同时，CoreOS 几乎可以运行在任何平台：VirtualBox, Amazon EC2, QEMU/KVM, VMware 和 OpenStack 等等，甚至你所使用的硬件环境</p>
+<p>其提供了运行现代基础设施的特性，支持大规模服务部署，使得在基于最小化的现代操作系统上<strong>构建规模化的计算仓库</strong>成为了可能</p>
+<ul>
+<li>最小化OS：CoreOS 被设计成一个基于容器的最小化的现代操作系统。它比现有的 Linux 安装平均节省 40% 的 RAM（大约 114M ）并允许从 PXE 或 iPXE 非常快速的启动</li>
+<li>无痛更新：利用主动和被动双分区方案来更新 OS，使用分区作为一个单元而不是一个包一个包的更新。这使得每次更新变得快速，可靠，而且很容易回滚</li>
+<li>Docker 容器：应用作为 Docker 容器运行在 CoreOS 上。容器以包的形式提供最大得灵活性并且可以在几毫秒启动</li>
+<li>支持集群：CoreOS 可以在一个机器上很好地运行，但是它被设计用来搭建集群。可以通过 k8s 很容易得使应用容器部署在多台机器上并且通过服务发现把他们连接在一起</li>
+<li>分布式系统工具：内置诸如分布式锁和主选举等原生工具用来构建大规模分布式系统得构建模块</li>
+<li>服务发现：容易定位服务在集群的那里运行并当发生变化时进行通知。它是复杂高动态集群必不可少的。在 CoreOS 中构建高可用和自动故障负载</li>
+</ul>
+<h3 id="Kubernetes：容器集群管理系统"><a href="#Kubernetes：容器集群管理系统" class="headerlink" title="Kubernetes：容器集群管理系统"></a>Kubernetes：容器集群管理系统</h3><p>是 Google 团队发起并维护的基于 Docker 的开源<strong>容器集群管理系统</strong> ，它的目标是管理跨多个主机的容器，提供基本的部署，维护以及运用伸缩，主要实现语言为 Go 语言</p>
+<ul>
+<li>易学：轻量级，简单，容易理解</li>
+<li>便携：支持公有云，私有云，混合云，以及多种云平台</li>
+<li>可拓展：模块化，可插拔，支持钩子，可任意组合</li>
+<li>自修复：自动重调度，自动重启，自动复制</li>
+</ul>
+<p><strong>在分布式系统中，部署，调度，伸缩一直是最为重要的也最为基础的功能</strong>，Kubernetes 就是希望解决这一序列问题的</p>
+<p>建于 Docker 之上的 <code>Kubernetes</code> 可以构建一个容器的调度服务，其目的是让用户透过 <code>Kubernetes</code> 集群来进行云端容器集群的管理，而无需用户进行复杂的设置工作。系统会自动选取合适的工作节点来执行具体的容器集群调度处理工作</p>
+<p>其核心概念是 <code>Container Pod</code>。一个 <code>Pod</code> 由一组工作于同一物理工作节点的容器构成。这些组容器拥有相同的网络命名空间、IP以及存储配额，也可以根据实际情况对每一个 <code>Pod</code> 进行端口映射。此外，<code>Kubernetes</code> 工作节点会由主系统进行管理，节点包含了能够运行 Docker 容器所用到的服务</p>
+<h3 id="Mesos：集群资源调度平台"><a href="#Mesos：集群资源调度平台" class="headerlink" title="Mesos：集群资源调度平台"></a>Mesos：集群资源调度平台</h3><p>Mesos 项目是源自 UC Berkeley 的对集群资源进行抽象和管理的开源项目，类似于操作系统内核，用户可以使用它很容易地实现分布式应用的自动化调度。可以将整个数据中心的资源（包括 CPU、内存、存储、网络等）进行抽象和调度，使得多个应用同时运行在集群中分享资源，并无需关心资源的物理分布情况</p>
+<p><strong>如果把数据中心中的集群资源看做一台服务器，那么 Mesos 要做的事情，其实就是今天操作系统内核的职责</strong>：<strong>抽象资源 + 调度任务</strong>。Mesos 项目是 Mesosphere 公司 Datacenter Operating System (DCOS) 产品的核心部件</p>
+<p>Mesos 拥有许多引人注目的特性，包括：</p>
+<ul>
+<li>支持<strong>数万个节点</strong>的大规模场景（Apple、Twitter、eBay 等公司实践）；</li>
+<li>支持多种应用框架，包括 Marathon、Singularity、Aurora 等；</li>
+<li>支持 HA（基于 ZooKeeper 实现）；</li>
+<li>支持 Docker、LXC 等容器机制进行任务隔离；</li>
+<li>提供了多个流行语言的 API，包括 Python、Java、C++ 等；</li>
+<li>自带了简洁易用的 WebUI，方便用户直接进行操作。</li>
+</ul>
+<p>值得注意的是，Mesos 自身只是一个资源抽象的平台，要使用它往往需要结合运行其上的<strong>分布式应用</strong>（在 Mesos 中被称作框架，framework），比如 Hadoop、Spark 等可以进行分布式计算的<strong>大数据处理应用</strong>；比如 Marathon 可以实现 <strong>PaaS</strong>，快速部署应用并自动保持运行；比如 ElasticSearch 可以<strong>索引</strong>海量数据，提供灵活的整合和<strong>查询</strong>能力……</p>
+<p>常见应用框架：</p>
+<ul>
+<li>长期运行的服务<ul>
+<li>Aurora</li>
+<li>Marathon</li>
+<li>Singularity</li>
+</ul>
+</li>
+<li>大数据处理<ul>
+<li>Cray Chapel</li>
+<li>Dpark</li>
+<li>Hadoop</li>
+<li>Spark</li>
+<li>Storm</li>
+</ul>
+</li>
+<li>批量调度<ul>
+<li>Chronos</li>
+<li>Jenkins</li>
+<li>JobServer</li>
+<li>GoDocker</li>
+</ul>
+</li>
+<li>数据存储<ul>
+<li>ElasticSearch</li>
+<li>Hypertable</li>
+<li>Tachyon</li>
+</ul>
+</li>
+</ul>
+<p>Mesos 最初设计为资源调度器，然而其灵活的设计和对上层框架的优秀支持，使得它可以很好的支持大规模的分布式应用场景。结合 Docker，Mesos 可以很容易部署一套私有的容器云。</p>
+<p>除了核心功能之外，Mesos 在设计上有许多值得借鉴之处，比如它清晰的定位、简洁的架构、细致的参数、高度容错的可靠，还有对限速、监控等的支持等。</p>
+<p>Mesos 作为一套成熟的开源项目，可以很好的被应用和集成到生产环境中。但它的定位集中在资源调度，往往需要结合应用框架或二次开发</p>
+<h2 id="Docker-与云计算"><a href="#Docker-与云计算" class="headerlink" title="Docker 与云计算"></a>Docker 与云计算</h2><p>目前与容器相关的云计算主要分为两种类型。</p>
+<ul>
+<li>一种是传统的 IaaS 服务商提供对容器相关的服务，包括镜像下载、容器托管等。</li>
+<li>另一种是直接基于容器技术对外提供容器云服务，所谓 Container as a Service（CaaS）</li>
+</ul>
+<p>使用 Docker 的云服务厂商有：</p>
+<ul>
+<li>AWS：EC2</li>
+<li>腾讯云</li>
+<li>阿里云</li>
+</ul>
+<h2 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h2><h3 id="Docker-与-LXC（Linux-Container）有何不同？"><a href="#Docker-与-LXC（Linux-Container）有何不同？" class="headerlink" title="Docker 与 LXC（Linux Container）有何不同？"></a>Docker 与 LXC（Linux Container）有何不同？</h3><p>答：LXC 利用 Linux 上相关技术实现了容器。Docker 则在如下的几个方面进行了改进：</p>
+<ul>
+<li>移植性：通过<strong>抽象容器配置</strong>，容器可以实现从一个平台移植到另一个平台；</li>
+<li>镜像系统：<strong>基于 AUFS 的镜像系统</strong>为容器的分发带来了很多的便利，同时共同的镜像层只需要存储一份，实现高效率的存储；</li>
+<li>版本管理：<strong>类似于Git的版本管理理念，用户可以更方便的创建、管理镜像文件</strong>；</li>
+<li>仓库系统：<strong>仓库系统大大降低了镜像的分发和管理的成本</strong>；</li>
+<li>周边工具：各种现有工具（配置管理、云平台）对 Docker 的支持，以及基于 Docker的 PaaS、CI 等系统，让 Docker 的应用更加方便和多样化</li>
+</ul>
+<h3 id="如何将一台宿主主机的-Docker-环境迁移到另外一台宿主主机？"><a href="#如何将一台宿主主机的-Docker-环境迁移到另外一台宿主主机？" class="headerlink" title="如何将一台宿主主机的 Docker 环境迁移到另外一台宿主主机？"></a>如何将一台宿主主机的 Docker 环境迁移到另外一台宿主主机？</h3><p>答：停止 Docker 服务。将整个 Docker 存储文件夹复制到另外一台宿主主机，然后调整另外一台宿主主机的配置即可</p>
+<h2 id="Docker-命令查询"><a href="#Docker-命令查询" class="headerlink" title="Docker 命令查询"></a>Docker 命令查询</h2><h2 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h2><p>Docker 命令有两大类，客户端命令和服务端命令。前者是主要的操作接口，后者用来启动 Docker Daemon。</p>
+<ul>
+<li>客户端命令：基本命令格式为 <code>docker [OPTIONS] COMMAND [arg...]</code>；</li>
+<li>服务端命令：基本命令格式为 <code>dockerd [OPTIONS]</code>。</li>
+</ul>
+<p>可以通过 <code>man docker</code> 或 <code>docker help</code> 来查看这些命令。</p>
+<h2 id="客户端命令选项"><a href="#客户端命令选项" class="headerlink" title="客户端命令选项"></a>客户端命令选项</h2><ul>
+<li><code>--config=&quot;&quot;</code>：指定客户端配置文件，默认为 <code>~/.docker</code>；</li>
+<li><code>-D=true|false</code>：是否使用 debug 模式。默认不开启；</li>
+<li><code>-H, --host=[]</code>：指定命令对应 Docker 守护进程的监听接口，可以为 unix 套接字 <code>unix:///path/to/socket</code>，文件句柄 <code>fd://socketfd</code> 或 tcp 套接字 <code>tcp://[host[:port]]</code>，默认为 <code>unix:///var/run/docker.sock</code>；</li>
+<li><code>-l, --log-level=&quot;debug|info|warn|error|fatal&quot;</code>：指定日志输出级别；</li>
+<li><code>--tls=true|false</code>：是否对 Docker 守护进程启用 TLS 安全机制，默认为否；</li>
+<li><code>--tlscacert=/.docker/ca.pem</code>：TLS CA 签名的可信证书文件路径；</li>
+<li><code>--tlscert=/.docker/cert.pem</code>：TLS 可信证书文件路径；</li>
+<li><code>--tlscert=/.docker/key.pem</code>：TLS 密钥文件路径；</li>
+<li><code>--tlsverify=true|false</code>：启用 TLS 校验，默认为否。</li>
+</ul>
+<h2 id="dockerd-命令选项"><a href="#dockerd-命令选项" class="headerlink" title="dockerd 命令选项"></a>dockerd 命令选项</h2><ul>
+<li><code>--api-cors-header=&quot;&quot;</code>：CORS 头部域，默认不允许 CORS，要允许任意的跨域访问，可以指定为 “*”；</li>
+<li><code>--authorization-plugin=&quot;&quot;</code>：载入认证的插件；</li>
+<li><code>-b=&quot;&quot;</code>：将容器挂载到一个已存在的网桥上。指定为 <code>none</code> 时则禁用容器的网络，与 <code>--bip</code> 选项互斥；</li>
+<li><code>--bip=&quot;&quot;</code>：让动态创建的 <code>docker0</code> 网桥采用给定的 CIDR 地址; 与 <code>-b</code> 选项互斥；</li>
+<li><code>--cgroup-parent=&quot;&quot;</code>：指定 cgroup 的父组，默认 fs cgroup 驱动为 <code>/docker</code>，systemd cgroup 驱动为 <code>system.slice</code>；</li>
+<li><code>--cluster-store=&quot;&quot;</code>：构成集群（如 <code>Swarm</code>）时，集群键值数据库服务地址；</li>
+<li><code>--cluster-advertise=&quot;&quot;</code>：构成集群时，自身的被访问地址，可以为 <code>host:port</code> 或 <code>interface:port</code>；</li>
+<li><code>--cluster-store-opt=&quot;&quot;</code>：构成集群时，键值数据库的配置选项；</li>
+<li><code>--config-file=&quot;/etc/docker/daemon.json&quot;</code>：daemon 配置文件路径；</li>
+<li><code>--containerd=&quot;&quot;</code>：containerd 文件的路径；</li>
+<li><code>-D, --debug=true|false</code>：是否使用 Debug 模式。缺省为 false；</li>
+<li><code>--default-gateway=&quot;&quot;</code>：容器的 IPv4 网关地址，必须在网桥的子网段内；</li>
+<li><code>--default-gateway-v6=&quot;&quot;</code>：容器的 IPv6 网关地址；</li>
+<li><code>--default-ulimit=[]</code>：默认的 ulimit 值；</li>
+<li><code>--disable-legacy-registry=true|false</code>：是否允许访问旧版本的镜像仓库服务器；</li>
+<li><code>--dns=&quot;&quot;</code>：指定容器使用的 DNS 服务器地址；</li>
+<li><code>--dns-opt=&quot;&quot;</code>：DNS 选项；</li>
+<li><code>--dns-search=[]</code>：DNS 搜索域；</li>
+<li><code>--exec-opt=[]</code>：运行时的执行选项；</li>
+<li><code>--exec-root=&quot;&quot;</code>：容器执行状态文件的根路径，默认为 <code>/var/run/docker</code>；</li>
+<li><code>--fixed-cidr=&quot;&quot;</code>：限定分配 IPv4 地址范围；</li>
+<li><code>--fixed-cidr-v6=&quot;&quot;</code>：限定分配 IPv6 地址范围；</li>
+<li><code>-G, --group=&quot;&quot;</code>：分配给 unix 套接字的组，默认为 <code>docker</code>；</li>
+<li><code>-g, --graph=&quot;&quot;</code>：Docker 运行时的根路径，默认为 <code>/var/lib/docker</code>；</li>
+<li><code>-H, --host=[]</code>：指定命令对应 Docker daemon 的监听接口，可以为 unix 套接字 <code>unix:///path/to/socket</code>，文件句柄 <code>fd://socketfd</code> 或 tcp 套接字 <code>tcp://[host[:port]]</code>，默认为 <code>unix:///var/run/docker.sock</code>；</li>
+<li><code>--icc=true|false</code>：是否启用容器间以及跟 daemon 所在主机的通信。默认为 true。</li>
+<li><code>--insecure-registry=[]</code>：允许访问给定的非安全仓库服务；</li>
+<li><code>--ip=&quot;&quot;</code>：绑定容器端口时候的默认 IP 地址。缺省为 <code>0.0.0.0</code>；</li>
+<li><code>--ip-forward=true|false</code>：是否检查启动在 Docker 主机上的启用 IP 转发服务，默认开启。注意关闭该选项将不对系统转发能力进行任何检查修改；</li>
+<li><code>--ip-masq=true|false</code>：是否进行地址伪装，用于容器访问外部网络，默认开启；</li>
+<li><code>--iptables=true|false</code>：是否允许 Docker 添加 iptables 规则。缺省为 true；</li>
+<li><code>--ipv6=true|false</code>：是否启用 IPv6 支持，默认关闭；</li>
+<li><code>-l, --log-level=&quot;debug|info|warn|error|fatal&quot;</code>：指定日志输出级别；</li>
+<li><code>--label=&quot;[]&quot;</code>：添加指定的键值对标注；</li>
+<li><code>--log-driver=&quot;json-file|syslog|journald|gelf|fluentd|awslogs|splunk|etwlogs|gcplogs|none&quot;</code>：指定日志后端驱动，默认为 <code>json-file</code>；</li>
+<li><code>--log-opt=[]</code>：日志后端的选项；</li>
+<li><code>--mtu=VALUE</code>：指定容器网络的 <code>mtu</code>；</li>
+<li><code>-p=&quot;&quot;</code>：指定 daemon 的 PID 文件路径。缺省为 <code>/var/run/docker.pid</code>；</li>
+<li><code>--raw-logs</code>：输出原始，未加色彩的日志信息；</li>
+<li><code>--registry-mirror=&lt;scheme&gt;://&lt;host&gt;</code>：指定 <code>docker pull</code> 时使用的注册服务器镜像地址；</li>
+<li><code>-s, --storage-driver=&quot;&quot;</code>：指定使用给定的存储后端；</li>
+<li><code>--selinux-enabled=true|false</code>：是否启用 SELinux 支持。缺省值为 false。SELinux 目前尚不支持 overlay 存储驱动；</li>
+<li><code>--storage-opt=[]</code>：驱动后端选项；</li>
+<li><code>--tls=true|false</code>：是否对 Docker daemon 启用 TLS 安全机制，默认为否；</li>
+<li><code>--tlscacert=/.docker/ca.pem</code>：TLS CA 签名的可信证书文件路径；</li>
+<li><code>--tlscert=/.docker/cert.pem</code>：TLS 可信证书文件路径；</li>
+<li><code>--tlscert=/.docker/key.pem</code>：TLS 密钥文件路径；</li>
+<li><code>--tlsverify=true|false</code>：启用 TLS 校验，默认为否；</li>
+<li><code>--userland-proxy=true|false</code>：是否使用用户态代理来实现容器间和出容器的回环通信，默认为 true；</li>
+<li><code>--userns-remap=default|uid:gid|user:group|user|uid</code>：指定容器的用户命名空间，默认是创建新的 UID 和 GID 映射到容器内进程。</li>
+</ul>
+<h2 id="客户端命令"><a href="#客户端命令" class="headerlink" title="客户端命令"></a>客户端命令</h2><p>可以通过 <code>docker COMMAND --help</code> 来查看这些命令的具体用法。</p>
+<ul>
+<li><code>attach</code>：依附到一个正在运行的容器中；</li>
+<li><code>build</code>：从一个 Dockerfile 创建一个镜像；</li>
+<li><code>commit</code>：从一个容器的修改中创建一个新的镜像；</li>
+<li><code>cp</code>：在容器和本地宿主系统之间复制文件中；</li>
+<li><code>create</code>：创建一个新容器，但并不运行它；</li>
+<li><code>diff</code>：检查一个容器内文件系统的修改，包括修改和增加；</li>
+<li><code>events</code>：从服务端获取实时的事件；</li>
+<li><code>exec</code>：在运行的容器内执行命令；</li>
+<li><code>export</code>：导出容器内容为一个 <code>tar</code> 包；</li>
+<li><code>history</code>：显示一个镜像的历史信息；</li>
+<li><code>images</code>：列出存在的镜像；</li>
+<li><code>import</code>：导入一个文件（典型为 <code>tar</code> 包）路径或目录来创建一个本地镜像；</li>
+<li><code>info</code>：显示一些相关的系统信息；</li>
+<li><code>inspect</code>：显示一个容器的具体配置信息；</li>
+<li><code>kill</code>：关闭一个运行中的容器 (包括进程和所有相关资源)；</li>
+<li><code>load</code>：从一个 tar 包中加载一个镜像；</li>
+<li><code>login</code>：注册或登录到一个 Docker 的仓库服务器；</li>
+<li><code>logout</code>：从 Docker 的仓库服务器登出；</li>
+<li><code>logs</code>：获取容器的 log 信息；</li>
+<li><code>network</code>：管理 Docker 的网络，包括查看、创建、删除、挂载、卸载等；</li>
+<li><code>node</code>：管理 swarm 集群中的节点，包括查看、更新、删除、提升/取消管理节点等；</li>
+<li><code>pause</code>：暂停一个容器中的所有进程；</li>
+<li><code>port</code>：查找一个 nat 到一个私有网口的公共口；</li>
+<li><code>ps</code>：列出主机上的容器；</li>
+<li><code>pull</code>：从一个Docker的仓库服务器下拉一个镜像或仓库；</li>
+<li><code>push</code>：将一个镜像或者仓库推送到一个 Docker 的注册服务器；</li>
+<li><code>rename</code>：重命名一个容器；</li>
+<li><code>restart</code>：重启一个运行中的容器；</li>
+<li><code>rm</code>：删除给定的若干个容器；</li>
+<li><code>rmi</code>：删除给定的若干个镜像；</li>
+<li><code>run</code>：创建一个新容器，并在其中运行给定命令；</li>
+<li><code>save</code>：保存一个镜像为 tar 包文件；</li>
+<li><code>search</code>：在 Docker index 中搜索一个镜像；</li>
+<li><code>service</code>：管理 Docker 所启动的应用服务，包括创建、更新、删除等；</li>
+<li><code>start</code>：启动一个容器；</li>
+<li><code>stats</code>：输出（一个或多个）容器的资源使用统计信息；</li>
+<li><code>stop</code>：终止一个运行中的容器；</li>
+<li><code>swarm</code>：管理 Docker swarm 集群，包括创建、加入、退出、更新等；</li>
+<li><code>tag</code>：为一个镜像打标签；</li>
+<li><code>top</code>：查看一个容器中的正在运行的进程信息；</li>
+<li><code>unpause</code>：将一个容器内所有的进程从暂停状态中恢复；</li>
+<li><code>update</code>：更新指定的若干容器的配置信息；</li>
+<li><code>version</code>：输出 Docker 的版本信息；</li>
+<li><code>volume</code>：管理 Docker volume，包括查看、创建、删除等；</li>
+<li><code>wait</code>：阻塞直到一个容器终止，然后输出它的退出符</li>
+</ul>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a href="https://yeasy.gitbooks.io/docker_practice/" target="_blank" rel="noopener">https://yeasy.gitbooks.io/docker_practice/</a></li>
+<li>Docker 从入门到实战-黄靖钧-华章出版社</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Blockchain/" rel="tag"><i class="fa fa-tag"></i> Blockchain</a>
+          
+            <a href="/tags/Docker/" rel="tag"><i class="fa fa-tag"></i> Docker</a>
+          
+            <a href="/tags/DevOps/" rel="tag"><i class="fa fa-tag"></i> DevOps</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/05/flow-generation/" rel="next" title="Network Flow Generation">
+                <i class="fa fa-chevron-left"></i> Network Flow Generation
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/15/hyperledger-intro/" rel="prev" title="Hyperledger Family">
+                Hyperledger Family <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/GeorgePig-128x128.png"
+                alt="S-Wong, M-Li" />
+            
+              <p class="site-author-name" itemprop="name">S-Wong, M-Li</p>
+              <p class="site-description motion-element" itemprop="description">Token Dynamic</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:wangcser@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                My Friends
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://silence.langinteger.com/" title="Happy Yasuo" target="_blank">Happy Yasuo</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#容器技术"><span class="nav-number">1.</span> <span class="nav-text">容器技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#容器技术的发展"><span class="nav-number">1.1.</span> <span class="nav-text">容器技术的发展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#容器技术的核心原理"><span class="nav-number">1.2.</span> <span class="nav-text">容器技术的核心原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#容器与-Docker"><span class="nav-number">1.3.</span> <span class="nav-text">容器与 Docker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何理解-Docker"><span class="nav-number">1.4.</span> <span class="nav-text">如何理解 Docker</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#What-is-Docker"><span class="nav-number">2.</span> <span class="nav-text">What is Docker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-Docker"><span class="nav-number">3.</span> <span class="nav-text">Why Docker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-Base-Concept"><span class="nav-number">4.</span> <span class="nav-text">Docker Base Concept</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker-Image"><span class="nav-number">4.1.</span> <span class="nav-text">Docker Image</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker-Container"><span class="nav-number">4.2.</span> <span class="nav-text">Docker Container</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker-Registry"><span class="nav-number">4.3.</span> <span class="nav-text">Docker Registry</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#公开服务"><span class="nav-number">4.3.1.</span> <span class="nav-text">公开服务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#私有服务"><span class="nav-number">4.3.2.</span> <span class="nav-text">私有服务</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Installing-Docker"><span class="nav-number">5.</span> <span class="nav-text">Installing Docker</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装工作"><span class="nav-number">5.1.</span> <span class="nav-text">安装工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关键工作"><span class="nav-number">5.2.</span> <span class="nav-text">关键工作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Using-Image"><span class="nav-number">6.</span> <span class="nav-text">Using Image</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#从仓库获取镜像"><span class="nav-number">6.1.</span> <span class="nav-text">从仓库获取镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#管理本地镜像"><span class="nav-number">6.2.</span> <span class="nav-text">管理本地镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#镜像基本原理"><span class="nav-number">6.3.</span> <span class="nav-text">镜像基本原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#×使用-Dockerfile-定制镜像"><span class="nav-number">6.4.</span> <span class="nav-text">×使用 Dockerfile 定制镜像</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Using-Container"><span class="nav-number">7.</span> <span class="nav-text">Using Container</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#启动容器"><span class="nav-number">7.1.</span> <span class="nav-text">启动容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后台运行"><span class="nav-number">7.2.</span> <span class="nav-text">后台运行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#终止容器"><span class="nav-number">7.3.</span> <span class="nav-text">终止容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进入容器"><span class="nav-number">7.4.</span> <span class="nav-text">进入容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导入和导出容器"><span class="nav-number">7.5.</span> <span class="nav-text">导入和导出容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除容器"><span class="nav-number">7.6.</span> <span class="nav-text">删除容器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Using-Repository"><span class="nav-number">8.</span> <span class="nav-text">Using Repository</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker-Hub"><span class="nav-number">8.1.</span> <span class="nav-text">Docker Hub</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#×私有仓库"><span class="nav-number">8.2.</span> <span class="nav-text">×私有仓库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-数据管理"><span class="nav-number">9.</span> <span class="nav-text">Docker 数据管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据卷"><span class="nav-number">9.1.</span> <span class="nav-text">数据卷</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#挂载主机目录"><span class="nav-number">9.2.</span> <span class="nav-text">挂载主机目录</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-使用网络"><span class="nav-number">10.</span> <span class="nav-text">Docker 使用网络</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#外部访问容器"><span class="nav-number">10.1.</span> <span class="nav-text">外部访问容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#容器互联"><span class="nav-number">10.2.</span> <span class="nav-text">容器互联</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置容器的-DNS"><span class="nav-number">10.3.</span> <span class="nav-text">配置容器的 DNS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#×高级网络配置"><span class="nav-number">10.4.</span> <span class="nav-text">×高级网络配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-Compose"><span class="nav-number">11.</span> <span class="nav-text">Docker Compose</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用"><span class="nav-number">11.1.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#×命令说明"><span class="nav-number">11.2.</span> <span class="nav-text">×命令说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#×compose-模板文件"><span class="nav-number">11.3.</span> <span class="nav-text">×compose 模板文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-Machine"><span class="nav-number">12.</span> <span class="nav-text">Docker Machine</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-Swarm"><span class="nav-number">13.</span> <span class="nav-text">Docker Swarm</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Swarm-的基本概念"><span class="nav-number">13.1.</span> <span class="nav-text">Swarm 的基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#×Swarm-的使用"><span class="nav-number">13.2.</span> <span class="nav-text">×Swarm 的使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-安全特性"><span class="nav-number">14.</span> <span class="nav-text">Docker 安全特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内核命名空间"><span class="nav-number">14.1.</span> <span class="nav-text">内核命名空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#控制组"><span class="nav-number">14.2.</span> <span class="nav-text">控制组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务端防护"><span class="nav-number">14.3.</span> <span class="nav-text">服务端防护</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内核能力机制"><span class="nav-number">14.4.</span> <span class="nav-text">内核能力机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他安全特性"><span class="nav-number">14.5.</span> <span class="nav-text">其他安全特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">14.6.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-底层实现"><span class="nav-number">15.</span> <span class="nav-text">Docker 底层实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker-基本架构"><span class="nav-number">15.1.</span> <span class="nav-text">Docker 基本架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命名空间"><span class="nav-number">15.2.</span> <span class="nav-text">命名空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#控制组-1"><span class="nav-number">15.3.</span> <span class="nav-text">控制组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#联合文件系统"><span class="nav-number">15.4.</span> <span class="nav-text">联合文件系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#容器格式"><span class="nav-number">15.5.</span> <span class="nav-text">容器格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网络实现"><span class="nav-number">15.6.</span> <span class="nav-text">网络实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-项目"><span class="nav-number">16.</span> <span class="nav-text">Docker 项目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#etcd：分布式键值数据库"><span class="nav-number">16.1.</span> <span class="nav-text">etcd：分布式键值数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CoreOS：基于容器的-OS"><span class="nav-number">16.2.</span> <span class="nav-text">CoreOS：基于容器的 OS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kubernetes：容器集群管理系统"><span class="nav-number">16.3.</span> <span class="nav-text">Kubernetes：容器集群管理系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mesos：集群资源调度平台"><span class="nav-number">16.4.</span> <span class="nav-text">Mesos：集群资源调度平台</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-与云计算"><span class="nav-number">17.</span> <span class="nav-text">Docker 与云计算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Q-amp-A"><span class="nav-number">18.</span> <span class="nav-text">Q&amp;A</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker-与-LXC（Linux-Container）有何不同？"><span class="nav-number">18.1.</span> <span class="nav-text">Docker 与 LXC（Linux Container）有何不同？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何将一台宿主主机的-Docker-环境迁移到另外一台宿主主机？"><span class="nav-number">18.2.</span> <span class="nav-text">如何将一台宿主主机的 Docker 环境迁移到另外一台宿主主机？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-命令查询"><span class="nav-number">19.</span> <span class="nav-text">Docker 命令查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本语法"><span class="nav-number">20.</span> <span class="nav-text">基本语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#客户端命令选项"><span class="nav-number">21.</span> <span class="nav-text">客户端命令选项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dockerd-命令选项"><span class="nav-number">22.</span> <span class="nav-text">dockerd 命令选项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#客户端命令"><span class="nav-number">23.</span> <span class="nav-text">客户端命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">24.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-superpowers"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">S-Wong, M-Li</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>

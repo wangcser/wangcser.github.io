@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/GeorgePig-32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/GeorgePig-16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Ethereum,Token," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="在很久很久以后，人类文明只剩下一个国家——以太王国，这个王国借助区块链技术发展了非常发达的数字经济，发行的法币名字叫 ETH，另一方面，它的公民全都使用在线支付。Alice，Bob，Charles 是王国的三位公民，不出意外的话他们会是以后所有系列文章的主角。对了，本文还需要一位万能的角色：God，用于在人民群众的监督下优化王国的金融系统。 王国中所有人的名字就是他们的账户名，所有的公民使用一个统">
+<meta name="keywords" content="Ethereum,Token">
+<meta property="og:type" content="article">
+<meta property="og:title" content="支付">
+<meta property="og:url" content="http://yoursite.com/2018/10/06/pay/index.html">
+<meta property="og:site_name" content="PPGP">
+<meta property="og:description" content="在很久很久以后，人类文明只剩下一个国家——以太王国，这个王国借助区块链技术发展了非常发达的数字经济，发行的法币名字叫 ETH，另一方面，它的公民全都使用在线支付。Alice，Bob，Charles 是王国的三位公民，不出意外的话他们会是以后所有系列文章的主角。对了，本文还需要一位万能的角色：God，用于在人民群众的监督下优化王国的金融系统。 王国中所有人的名字就是他们的账户名，所有的公民使用一个统">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-04-07T12:13:24.353Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="支付">
+<meta name="twitter:description" content="在很久很久以后，人类文明只剩下一个国家——以太王国，这个王国借助区块链技术发展了非常发达的数字经济，发行的法币名字叫 ETH，另一方面，它的公民全都使用在线支付。Alice，Bob，Charles 是王国的三位公民，不出意外的话他们会是以后所有系列文章的主角。对了，本文还需要一位万能的角色：God，用于在人民群众的监督下优化王国的金融系统。 王国中所有人的名字就是他们的账户名，所有的公民使用一个统">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/10/06/pay/"/>
+
+
+
+
+
+  <title>支付 | PPGP</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PPGP</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">A site for Ms. Peppa and Mr. George, also Mr Dinosaur!</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/06/pay/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="S-Wong, M-Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/GeorgePig-128x128.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PPGP">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">支付</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-07T20:13:24+08:00">
+                2019-04-07
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Blockchain/" itemprop="url" rel="index">
+                    <span itemprop="name">Blockchain</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在很久很久以后，人类文明只剩下一个国家——以太王国，这个王国借助区块链技术发展了非常发达的数字经济，发行的法币名字叫 ETH，另一方面，它的公民全都使用在线支付。Alice，Bob，Charles 是王国的三位公民，不出意外的话他们会是以后所有系列文章的主角。对了，本文还需要一位万能的角色：God，用于在人民群众的监督下优化王国的金融系统。</p>
+<p>王国中所有人的名字就是他们的账户名，所有的公民使用一个统一的账本来记录自己的账户余额，这个账本每个人都能抄一份保存在自己家里，账本表示如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ETH_balances[usr_name] = XXX ETH</span><br></pre></td></tr></table></figure>
+<p>在一切开始之前，在一切开始之前，让我们先看看大家的账户情况：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ETH_balances[Alice] = 1 ETH</span><br><span class="line">ETH_balances[Bob] = 1 ETH</span><br><span class="line">ETH_balances[Chales] = 1 ETH</span><br><span class="line">ETH_balances[God] = 10000 ETH</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Account</th>
+<th style="text-align:center">Alice</th>
+<th style="text-align:center">Bob</th>
+<th style="text-align:center">Charles</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Symbol: ETH</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+</tr>
+</tbody>
+</table>
+<p>God 计划借助区块链在 Alice、Bob、Charles 三个人之间发行一种除 ETH 以外的代币来奖励三者之间的友好行为，God设计的代币方案如下：</p>
+<blockquote>
+<p>代币的名字叫 Good Friend Token，代币缩写为 GFT，发行量为 100 枚，最小发行单位为1枚。</p>
+</blockquote>
+<p>God 设计好代币方案后又制定了发行计划：</p>
+<blockquote>
+<p>由 God 将代币方案公布给大家，同时将初始的 100 个 GFT 全部交给 God，由 God 依照大家的友好程度分发给大家。</p>
+</blockquote>
+<p>为了保证大家能够自由地使用 GFT，同时又不希望设计太复杂的金融功能来增加自己的工作量，God在观察人类社会的货币体系后总结出了下面两条必备的功能：</p>
+<ol>
+<li>用户能够查询自己代币账户的余额；</li>
+<li>用户能够在自己的代币账户之间转账。</li>
+</ol>
+<p>OK，万事俱备，God 愉快地在Alice、Bob、Charles 三个人之间发行了 GFT 代币，具体的发行过程如下：</p>
+<ol>
+<li><p>God 在全国范围内宣布了这个方案，并为这个方案成立了一个银行，银行名字叫 GBT_Bank，它也有一个账户</p>
+</li>
+<li><p>GBT_Bank 银行按照 God 设计的发行计划，在银行管理的 GFT账本上将初始的 100 GFT 全部划到 God 名下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GFT_balances[God] = 100 GFT</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>剩下的人可以到 GFT_Bank 开户以便查询和交易自己账户上的 GFT。Alice、Bob、Charles 得知这一情况后也立即到银行开了户，查询他们的账户情况如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GFT_balances[Alice] = 0 GFT</span><br><span class="line">GFT_balances[Bob] = 0 GFT</span><br><span class="line">GFT_balances[Chales] = 0 GFT</span><br></pre></td></tr></table></figure>
+<p>|   Account   | Alice | Bob  | Charles |<br>| :———: | :—: | :–: | :—–: |<br>| Symbol: GFT |   0   |  0   |    0    |</p>
+</li>
+<li><p>此时该系统中有了货币和账户，可以开始设计流通方法啦。</p>
+</li>
+</ol>
+<p>为了方便大家在线获取自己的账户信息，GFT_Bank 为这一代币设计了两个操作方法，大家在自己的电脑上运行这两个方法就能实现对自己账户的操作：</p>
+<ol>
+<li><p>查询操作：由用户发起，查询 GFT 账本上对应账户的余额，由于以太王国所有账户都是公开的，任何人都可以查到其他人的账户信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Alice.balanceOf(Alice) = 0 GFT</span><br><span class="line">Alice.balanceOf(God) = 100 GFT</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>转账操作：由转账人发起，将转账人账户上的一些代币转入目标账户中，转账完毕后可以查询对应账户的余额信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">God.transfer(Alice, 10)</span><br><span class="line"></span><br><span class="line">Alice.balanceOf(Alice) = 10 GFT</span><br><span class="line">Alice.balanceOf(God) = 90 GFT</span><br></pre></td></tr></table></figure>
+<p>|   Account   | Alice | Bob  | Charles |<br>| :———: | :—: | :–: | :—–: |<br>| Symbol: GFT |  10   |  0   |    0    |</p>
+</li>
+</ol>
+<p>OK，有了这两个功能，大家就可以愉快地转账啦，整个系统也能够运转起来了。</p>
+<p>以上，就是我认为在一个特定空间中发行代币的最小功能集合，这已经能够保证系统运行起来了。在进入更加深入的分析之前，我们先来探讨几个问题：</p>
+<ol>
+<li><p>每个人的账户是怎么来的？</p>
+<p>在以太王国中，由于 God 精妙的安排，每个人的名字都是独一无二的，因此我们可以直接以每个人的名字设计账户，同时所有账户 ID 都向社会公开</p>
+</li>
+<li><p>账户会不会被冒用？</p>
+<p>由于 God 精妙的安排，以太王国的银行系统保证了自己的账户只能被自己打开和使用</p>
+</li>
+<li><p>为什么我的默认账本（ETH_balances）查询不到我的 GFT 信息？</p>
+<p>GFT 是由 GFT_Bank 发行的，换言之，其他银行是不承认这个代币的，因此你的一切操作只能去 GFT_Bank 办理。</p>
+</li>
+<li><p>为什么发行的 GFT 必须到 GFT 开户，并借助 GFT 才能操作？</p>
+<p>其实不管你是否去GFT 开户，理论上 GFT_Bank 都预留了你的账户信息，因为你的账户 ID 是公开的，只不过如果你不去 GFT_Bank 进行绑定，你就不知道你的 GFT 账本上有多少 GFT，也不可能去花你的 GFT。从另一个角度来讲，假如你没有去 GFT_Bank 开户（绑定），而你的 GFT 账户又默认存在，如果哪个小马虎错误地给你转了一笔 GFT，对你而言也只是一串数字而已。</p>
+</li>
+</ol>
+<p>由于只有两个功能：<strong>查询</strong>和<strong>转账</strong>，整个 GFT 系统运行地很好，但是随着大家金融活动的繁荣，人们对 GFT 提出了新的需求：我们能不能在 GFT 体系里<strong>使用支票</strong>？</p>
+<p>在这里我们先不讨论支票这一功能背后精妙的金融创造，我们先和 God 一起去满足这一需求。</p>
+<p>God 的开发原则依旧：在满足需求的情况下作最简单的实现。God 用他独有的上帝视角继续在人类社会中寻找方案，最终总结出下面三个功能：</p>
+<ol>
+<li>转出账户向接收账户授予一定额度；</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Alice.approve(Bob, 5)</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><p>接收账户从转出账户转移一定额度；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Bob.transferFrom(Alice, Bob, 5)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查询账户之间的支票配额信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Bob.allwance(Alice, Bob)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>GFT_Bank 为了实现这三个功能，光靠 GFT_balances 账本可不行，于是 GFT_Bank 又引入了一个新的账本：GFT_Allowced，在这里我们不妨称其为支票账本，它长这样的：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">From \ To</th>
+<th style="text-align:center">Alice</th>
+<th style="text-align:center">Bob</th>
+<th style="text-align:center">Charles</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Alice</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">Bob</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">Charles</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+</tr>
+</tbody>
+</table>
+<p>此时的余额账本信息：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Account</th>
+<th style="text-align:center">Alice</th>
+<th style="text-align:center">Bob</th>
+<th style="text-align:center">Charles</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Symbol: GFT</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+</tr>
+</tbody>
+</table>
+<p>我们通过一个简单的例子来了解这一过程是如何进行的：</p>
+<ol>
+<li><p>Bob 帮了 Alice 一个忙， Alice 对 Bob 承诺说：Bob，我从我的账户账户上给你开 10 GFT 的支票，你什么时候去取都可以；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Alice.approve(Bob, 10)</span><br></pre></td></tr></table></figure>
+<p>| From \ To | Alice | Bob  | Charles |<br>| :——-: | :—: | :–: | :—–: |<br>|   Alice   |   0   |  10  |    0    |<br>|    Bob    |   0   |  0   |    0    |<br>|  Charles  |   0   |  0   |    0    |</p>
+</li>
+<li><p>Bob 听了之后很高兴，赶紧去 GFT_Bank 的支票配额账本上查询 Alice 说的是不是真的；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Bob.allwance(Alice, Bob)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Bob 查询之后并没有立即将 GFT 转入自己名下；</p>
+</li>
+<li><p>几天之后，Bob遇到急事突然需要 5 GFT 进行周转，他想到了 Alice 的支票，于是去 Alice 账户上提取了 5 GFT 出来，并查询了之后的支票配额情况。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Bob.transferFrom(Alice, Bob, 5)</span><br></pre></td></tr></table></figure>
+<p>| From \ To | Alice | Bob  | Charles |<br>| :——-: | :—: | :–: | :—–: |<br>|   Alice   |   0   |  5   |    0    |<br>|    Bob    |   0   |  0   |    0    |<br>|  Charles  |   0   |  0   |    0    |</p>
+<p> 此时的余额账本信息：</p>
+<p>|   Account   | Alice | Bob  | Charles |<br>| :———: | :—: | :–: | :—–: |<br>| Symbol: GFT |   5   |  5   |    0    |</p>
+</li>
+</ol>
+<p>至此，GFT_Bank 就能满足广大人民群众日益增长的转账需要了。</p>
+<p>故事讲完了，细心的你可能会有一个疑问：为什么是支票呢？</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Ethereum/" rel="tag"><i class="fa fa-tag"></i> Ethereum</a>
+          
+            <a href="/tags/Token/" rel="tag"><i class="fa fa-tag"></i> Token</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/08/ETH-ERC721/" rel="prev" title="奇怪的画家">
+                奇怪的画家 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/GeorgePig-128x128.png"
+                alt="S-Wong, M-Li" />
+            
+              <p class="site-author-name" itemprop="name">S-Wong, M-Li</p>
+              <p class="site-description motion-element" itemprop="description">Token Dynamic</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:wangcser@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                My Friends
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://silence.langinteger.com/" title="Happy Yasuo" target="_blank">Happy Yasuo</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-superpowers"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">S-Wong, M-Li</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/GeorgePig-32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/GeorgePig-16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Network,bt," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="本文整理了常见的互联网下载协议：  HTTP / HTTPS FTP / SFTP BT 磁力链 电驴链接 迅雷链接  HTTP / HTTPSHTTP 是基于 C / S 模型的文件传输协议。协议全称为超文本传输协议，主要用于传输互联网上相对较小的文本文件和媒体文件。正如其名，它可以用来传输资源。该协议基于 C / S 模型，采用 HTTP 请求的方式从服务器指定的文件路径请求相应的资源文件，常">
+<meta name="keywords" content="Network,bt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Download is a Problem">
+<meta property="og:url" content="http://yoursite.com/2019/03/18/download/index.html">
+<meta property="og:site_name" content="PPGP">
+<meta property="og:description" content="本文整理了常见的互联网下载协议：  HTTP / HTTPS FTP / SFTP BT 磁力链 电驴链接 迅雷链接  HTTP / HTTPSHTTP 是基于 C / S 模型的文件传输协议。协议全称为超文本传输协议，主要用于传输互联网上相对较小的文本文件和媒体文件。正如其名，它可以用来传输资源。该协议基于 C / S 模型，采用 HTTP 请求的方式从服务器指定的文件路径请求相应的资源文件，常">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-04-07T12:13:24.353Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Download is a Problem">
+<meta name="twitter:description" content="本文整理了常见的互联网下载协议：  HTTP / HTTPS FTP / SFTP BT 磁力链 电驴链接 迅雷链接  HTTP / HTTPSHTTP 是基于 C / S 模型的文件传输协议。协议全称为超文本传输协议，主要用于传输互联网上相对较小的文本文件和媒体文件。正如其名，它可以用来传输资源。该协议基于 C / S 模型，采用 HTTP 请求的方式从服务器指定的文件路径请求相应的资源文件，常">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/18/download/"/>
+
+
+
+
+
+  <title>Download is a Problem | PPGP</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PPGP</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">A site for Ms. Peppa and Mr. George, also Mr Dinosaur!</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/18/download/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="S-Wong, M-Li">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/GeorgePig-128x128.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PPGP">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Download is a Problem</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-07T20:13:24+08:00">
+                2019-04-07
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Networking/" itemprop="url" rel="index">
+                    <span itemprop="name">Networking</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文整理了常见的互联网下载协议：</p>
+<ul>
+<li>HTTP / HTTPS</li>
+<li>FTP / SFTP</li>
+<li>BT</li>
+<li>磁力链</li>
+<li>电驴链接</li>
+<li>迅雷链接</li>
+</ul>
+<h2 id="HTTP-HTTPS"><a href="#HTTP-HTTPS" class="headerlink" title="HTTP / HTTPS"></a>HTTP / HTTPS</h2><p>HTTP 是基于 C / S 模型的文件传输协议。协议全称为<strong>超文本传输协议</strong>，主要用于传输互联网上相对较小的文本文件和媒体文件。正如其名，它可以用来传输资源。<br>该协议基于 C / S 模型，采用 HTTP 请求的方式从服务器指定的文件路径请求相应的资源文件，常用的链接如下：<br><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">http://sqdownd.onlinedown.net/down/bitcomet_setup150.exe</span></span><br></pre></td></tr></table></figure></p>
+<p>类比我们在本地主机上访问文件的过程，我们可以将这个过程想象为从远端主机访问文件，二者的区别在于本定访问使用本地文件路径，HTTP 请求使用主机地址+通信端口（80）+远程文件路径<br>由于 HTTP 协议并非为文件（大文件）传输而设计，因此对于无法控制文件的传输过程和传输效率，因此会出现三种常见情况：</p>
+<ol>
+<li>无法断点续传</li>
+<li>传输速度慢</li>
+<li>并发能力若</li>
+</ol>
+<h2 id="FTP-SFTP"><a href="#FTP-SFTP" class="headerlink" title="FTP / SFTP"></a>FTP / SFTP</h2><p>FTP 是基于 C / S 模型的文件传输协议。和 HTTP 一样，FTP 也是将文件放到服务器上，由服务器传输到不同的主机。<br>FTP 在 HTTP 的基础上增加了认证和传输控制过程，有的资源站出于方便的目的会采用 FTP 的 Anonymous 方法来跳过验证步骤。<br>FTP 的常用链接如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ftp://ftpserver:port/resourceName</span><br><span class="line">ftp://4:4@dx.dl1234.com:8006/阿甘正传BD双语双字[电影天堂www.dy2018.com].mkv</span><br></pre></td></tr></table></figure></p>
+<h2 id="BT"><a href="#BT" class="headerlink" title="BT"></a>BT</h2><ul>
+<li>2001.04<br>BT 是基于 P2P 通信模型的文件共享协议。<br>P2P 模型所具有的特点为：</li>
+<li>无中心的对等网络，每个节点既是客户端，也是服务器</li>
+<li>文件采用分块存储，方便并发传输</li>
+<li>持有相同资源的用户越多，下载文件的速度越快</li>
+</ul>
+<p>讲到 BT 协议，就必须要谈一谈 BT 精神：</p>
+<ul>
+<li>注：BT 下载讲究共享精神，这跟互联网的共享精神一脉相承。所以建议不要限制上传速度。</li>
+<li>一般的 BT 客户端程序，默认设置都未对下载速度和上传速度进行限制，这是因为BT 软件会给上传速度较快的用户优先提供服务，也就是说上传速度越快，下载速度也越快，因此如果你带宽过剩的话，下载时就不要去限制上传速度了。</li>
+</ul>
+<p>BT 协议的特点：</p>
+<ul>
+<li>速度快</li>
+<li>保护隐私</li>
+<li>减轻服务器压力</li>
+<li>版权问题</li>
+</ul>
+<p>BT 下载原理：</p>
+<ol>
+<li>从互联网等渠道获取种子文件</li>
+<li>客户端解析种子文件获得 Tracker 地址，连接 Tracker 服务器</li>
+<li>Tracker 服务器响应情况，告知其他持有资源的节点的位置（IP），客户端连接其他节点</li>
+<li>客户端根据种子文件和对端交换缺失的文件块，每下载一块就利用种子文件校验其正确性（HASH）</li>
+</ol>
+<h2 id="磁力链接"><a href="#磁力链接" class="headerlink" title="磁力链接"></a>磁力链接</h2><p>旧的 BT 协议虽然是去中心化的，但是系统中存在 Tracker 这样的关键点，因此引入 DHT 技术来解决这个问题<br>DHT 全称分布式哈希表，是一种分布式检索和存储技术，使用 DHT 的 BT 协议可以在没有 Tracker 的参与时使用 DHT 寻址的方法获得其他节点的位置信息</p>
+<p>我们可以利用 DHT 文件爬取种子资源</p>
+<p>磁力链接是对整个文件的 HASH，使用该 HASH 在 DHT 中搜索需要的种子文件，文件完整性更好，是一种基于文件的寻址方式</p>
+<h2 id="电驴"><a href="#电驴" class="headerlink" title="电驴"></a>电驴</h2><ul>
+<li>2000, metaCachine 公司开发了 eDonkey2000，一个跨平台的闭源 P2P 共享软件，由三部分组成：<ul>
+<li>eDonkey 网络：一个 P2P 的文件共享网络，后升级为 DHT 网络</li>
+<li>eDonkey 软件：能够连接 eDonkey 网络的节点</li>
+<li>eDonkey 链接：用于指示网络中文件的链接，是文件内容的 HASH</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ed2k://|file|%E6%B2%B3%E7%95%94.720p.BD%E4%B8%AD%E5%AD%97[%E6%9C%80%E6%96%B0%E7%94%B5%E5%BD%B1www.66ys.tv].mp4|1284891202|5052C583C3EC5A5BC626F45847CB0340|h=5QE3DFPQBGH5JXPBSZ4P5IHVAUS3HWPY|/</span><br></pre></td></tr></table></figure>
+<p>名称    对文件内容做哈希提取    早期有中央服务器阶段    后期脱离中央服务器阶段<br>电驴    eD2k链接    eDonkey网络    KAD网络<br>BT    磁力链接    Tracker网络    HDT网络</p>
+<h3 id="电骡"><a href="#电骡" class="headerlink" title="电骡"></a>电骡</h3><p>虽然 eDonkey2000 倒下了，但是后起之秀其实在它刚诞生1年就已经出现了，那就是 eMule，因为 eMule 在中文是骡子的意思，所以中文正式翻译是电骡。它是一款开源软件，它可以看作是是商业软件 eDonkey 的同人作品<br>它除了支持 eDonkey 的网络和 eD2k 协议之外，还新增了很多不一样的功能，特别是 KAD 节点（类似 BT 的 HDT 网络）的支持，让 eD2k 彻底成为了完全的 P2P 网络<br>eDonkey 电驴所使用的 eDonkey 网络，虽然也是基于 P2P 共享，但是仍然离不开中央服务器。一群人使用 eDonkey 电驴进行文件共享，必须要有中央服务器来作为通讯中心，为用户提供查找文件等服务。而 KAD 则是更彻底的 P2P，只需要用户作为节点，用户之间能够直接连接，完全脱离了中央服务器。这种方式其实也因此经受住了版权商的压力而巍然不动，因为用户之间共享盗版可以推脱给用户的自发行为</p>
+<h3 id="easyMule"><a href="#easyMule" class="headerlink" title="easyMule"></a>easyMule</h3><p>上文提到国内的 eMule 发展的不温不火，于是上海维西（VeryCD）公司看到了商机，因为 eMule 是开源的，所以2007年起开始将 eMule 的代码拿来开发，改名叫 easyMule。easyMule 第一版为 eMule Mod，修改自官方 eMule，因而遵循 GNU GPL v2 协议，开放源代码；第二版声称完全自主开发而闭源，但其是否真正完全自主开发尚存在争议。VeryCD 公司宣传称 easyMule 为“电驴”，此名称存在较大争议，因为明显跟 eDonkey 电驴容易起混淆<br>在起初，VeryCD 电驴还保留着 eMule 的大量功能，但到了后来，VeryCD 电驴将最精髓的 KAD 资源搜索等功能重重阉割（KAD 可以搜索全球e Mule 共享的资源，VeryCD 电驴后来只能搜索自己官网的资源），而且宣传上更是将自己当做是正牌电驴。在好长一段时间内，搜索引擎搜“电驴”、“电骡”、“eMule”，排名首页的一度是 VeryCD官网而非 eMule-Project 官网。VeryCD 官网通过把 eD2k 资源进行了整合，建立起了 eD2k 分享平台，一度成为了中国大陆浏览量最大的资源分享网站之一</p>
+<h3 id="Else"><a href="#Else" class="headerlink" title="Else"></a>Else</h3><p>迅雷链接、快车链接、旋风链接都不是协议，只是单纯对字符串做一些编码操作，好让别的下载软件识别不了，而自家的软件因为知道解码规则所以可以</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Network/" rel="tag"><i class="fa fa-tag"></i> Network</a>
+          
+            <a href="/tags/bt/" rel="tag"><i class="fa fa-tag"></i> bt</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/15/hyperledger-intro/" rel="next" title="Hyperledger Family">
+                <i class="fa fa-chevron-left"></i> Hyperledger Family
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/21/acdemic-manage/" rel="prev" title="我的（跨平台、多设备）文献管理方案">
+                我的（跨平台、多设备）文献管理方案 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/GeorgePig-128x128.png"
+                alt="S-Wong, M-Li" />
+            
+              <p class="site-author-name" itemprop="name">S-Wong, M-Li</p>
+              <p class="site-description motion-element" itemprop="description">Token Dynamic</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:wangcser@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                My Friends
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://silence.langinteger.com/" title="Happy Yasuo" target="_blank">Happy Yasuo</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP-HTTPS"><span class="nav-number">1.</span> <span class="nav-text">HTTP / HTTPS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FTP-SFTP"><span class="nav-number">2.</span> <span class="nav-text">FTP / SFTP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BT"><span class="nav-number">3.</span> <span class="nav-text">BT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#磁力链接"><span class="nav-number">4.</span> <span class="nav-text">磁力链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#电驴"><span class="nav-number">5.</span> <span class="nav-text">电驴</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#电骡"><span class="nav-number">5.1.</span> <span class="nav-text">电骡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#easyMule"><span class="nav-number">5.2.</span> <span class="nav-text">easyMule</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Else"><span class="nav-number">5.3.</span> <span class="nav-text">Else</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-superpowers"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">S-Wong, M-Li</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
