@@ -191,14 +191,6 @@
         </li>
       
         
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-            归档
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-categories">
           <a href="/categories/" rel="section">
             
@@ -211,6 +203,30 @@
           <a href="/tags/" rel="section">
             
             标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-读书">
+          <a href="/books" rel="section">
+            
+            读书
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-电影">
+          <a href="/movies" rel="section">
+            
+            电影
           </a>
         </li>
       
@@ -261,7 +277,6 @@
     </div>
   
 </nav>
-
 
 
  </div>
@@ -573,6 +588,10 @@
                     <a href="http://silence.langinteger.com/" title="Happy Yasuo" target="_blank">Happy Yasuo</a>
                   </li>
                 
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blog.mythsman.com/" title="Mythsman" target="_blank">Mythsman</a>
+                  </li>
+                
               </ul>
             </div>
           
@@ -598,7 +617,7 @@
       <div class="footer-inner">
         <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
-    <i class="fa fa-superpowers"></i>
+    <i class="fa fa-author"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">George Mandy</span>
 
@@ -606,17 +625,35 @@
 </div>
 
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
 
-  <span class="post-meta-divider">|</span>
 
 
 
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a></div>
 
+<div style="text-align: center"><span id="jrsc" >正在加载今日诗词....</span></div>
 
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+<script>
+  console.log('今日诗词 - 开始加载...');
+  jinrishici.load((result) => {
+    let jrsc = document.getElementById('jrsc');
+    if (jrsc) {
+      console.log('今日诗词 - 标签获取成功.');
+    } else {
+      console.log('今日诗词 - 标签获取失败!');
+      return;
+    }
+    const data = result.data;
+    let author = data.origin.author;
+    let title = '《' + data.origin.title + '》';
+    let content = data.content.substr(0, data.content.length);
+    let dynasty = data.origin.dynasty.substr(0, data.origin.dynasty.length - 1);
+    jrsc.innerText = content + '  ' + dynasty + '·' + author + title;
+    console.log('今日诗词 - 载入完毕.');
+  });
+</script>
 
 
         
