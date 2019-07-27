@@ -71,7 +71,7 @@
 
 
 
-  <meta name="keywords" content="Ethereum,Token," />
+  <meta name="keywords" content="加密经济学,ERC-20," />
 
 
 
@@ -83,16 +83,16 @@
 
 
 <meta name="description" content="在很久很久以后，人类文明只剩下一个国家——以太王国，这个王国借助区块链技术发展了非常发达的数字经济，发行的法币名字叫 ETH，另一方面，它的公民全都使用在线支付。Alice，Bob，Charles 是王国的三位公民，不出意外的话他们会是以后所有系列文章的主角。对了，本文还需要一位万能的角色：God，用于在人民群众的监督下优化王国的金融系统。 王国中所有人的名字就是他们的账户名，所有的公民使用一个统">
-<meta name="keywords" content="Ethereum,Token">
+<meta name="keywords" content="加密经济学,ERC-20">
 <meta property="og:type" content="article">
-<meta property="og:title" content="支付">
+<meta property="og:title" content="现金、支票与银行账户">
 <meta property="og:url" content="http://yoursite.com/2018/10/06/pay/index.html">
 <meta property="og:site_name" content="George Mandy">
 <meta property="og:description" content="在很久很久以后，人类文明只剩下一个国家——以太王国，这个王国借助区块链技术发展了非常发达的数字经济，发行的法币名字叫 ETH，另一方面，它的公民全都使用在线支付。Alice，Bob，Charles 是王国的三位公民，不出意外的话他们会是以后所有系列文章的主角。对了，本文还需要一位万能的角色：God，用于在人民群众的监督下优化王国的金融系统。 王国中所有人的名字就是他们的账户名，所有的公民使用一个统">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-07T12:13:24.353Z">
+<meta property="og:updated_time" content="2019-07-27T12:36:14.959Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="支付">
+<meta name="twitter:title" content="现金、支票与银行账户">
 <meta name="twitter:description" content="在很久很久以后，人类文明只剩下一个国家——以太王国，这个王国借助区块链技术发展了非常发达的数字经济，发行的法币名字叫 ETH，另一方面，它的公民全都使用在线支付。Alice，Bob，Charles 是王国的三位公民，不出意外的话他们会是以后所有系列文章的主角。对了，本文还需要一位万能的角色：God，用于在人民群众的监督下优化王国的金融系统。 王国中所有人的名字就是他们的账户名，所有的公民使用一个统">
 
 
@@ -129,7 +129,7 @@
 
 
 
-  <title>支付 | George Mandy</title>
+  <title>现金、支票与银行账户 | George Mandy</title>
   
 
 
@@ -320,7 +320,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">支付</h1>
+          <h1 class="post-title" itemprop="name headline">现金、支票与银行账户</h1>
         
 
         <div class="post-meta">
@@ -355,8 +355,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Blockchain/" itemprop="url" rel="index">
-                    <span itemprop="name">Blockchain</span>
+                  <a href="/categories/区块链/" itemprop="url" rel="index">
+                    <span itemprop="name">区块链</span>
                   </a>
                 </span>
 
@@ -570,8 +570,39 @@
 <ol>
 <li><p>Bob 帮了 Alice 一个忙， Alice 对 Bob 承诺说：Bob，我从我的账户账户上给你开 10 GFT 的支票，你什么时候去取都可以；</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Alice.approve(Bob, 10)</span><br></pre></td></tr></table></figure>
-<p>| From \ To | Alice | Bob  | Charles |<br>| :——-: | :—: | :–: | :—–: |<br>|   Alice   |   0   |  10  |    0    |<br>|    Bob    |   0   |  0   |    0    |<br>|  Charles  |   0   |  0   |    0    |</p>
 </li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">From \ To</th>
+<th style="text-align:center">Alice</th>
+<th style="text-align:center">Bob</th>
+<th style="text-align:center">Charles</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Alice</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">Bob</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">Charles</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+</tr>
+</tbody>
+</table>
+<ol start="2">
 <li><p>Bob 听了之后很高兴，赶紧去 GFT_Bank 的支票配额账本上查询 Alice 说的是不是真的；</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Bob.allwance(Alice, Bob)</span><br></pre></td></tr></table></figure>
 </li>
@@ -579,11 +610,57 @@
 </li>
 <li><p>几天之后，Bob遇到急事突然需要 5 GFT 进行周转，他想到了 Alice 的支票，于是去 Alice 账户上提取了 5 GFT 出来，并查询了之后的支票配额情况。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Bob.transferFrom(Alice, Bob, 5)</span><br></pre></td></tr></table></figure>
-<p>| From \ To | Alice | Bob  | Charles |<br>| :——-: | :—: | :–: | :—–: |<br>|   Alice   |   0   |  5   |    0    |<br>|    Bob    |   0   |  0   |    0    |<br>|  Charles  |   0   |  0   |    0    |</p>
-<p> 此时的余额账本信息：</p>
-<p>|   Account   | Alice | Bob  | Charles |<br>| :———: | :—: | :–: | :—–: |<br>| Symbol: GFT |   5   |  5   |    0    |</p>
+<p>此时的余额账本信息：</p>
 </li>
 </ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">From \ To</th>
+<th style="text-align:center">Alice</th>
+<th style="text-align:center">Bob</th>
+<th style="text-align:center">Charles</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Alice</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">Bob</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">Charles</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Account</th>
+<th style="text-align:center">Alice</th>
+<th style="text-align:center">Bob</th>
+<th style="text-align:center">Charles</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Symbol: GFT</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">0</td>
+</tr>
+</tbody>
+</table>
 <p>至此，GFT_Bank 就能满足广大人民群众日益增长的转账需要了。</p>
 <p>故事讲完了，细心的你可能会有一个疑问：为什么是支票呢？</p>
 
@@ -606,7 +683,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://yoursite.com/2018/10/06/pay/" title="支付">http://yoursite.com/2018/10/06/pay/</a>
+    <a href="http://yoursite.com/2018/10/06/pay/" title="现金、支票与银行账户">http://yoursite.com/2018/10/06/pay/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -621,9 +698,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Ethereum/" rel="tag"><i class="fa fa-tag"></i> Ethereum</a>
+            <a href="/tags/加密经济学/" rel="tag"><i class="fa fa-tag"></i> 加密经济学</a>
           
-            <a href="/tags/Token/" rel="tag"><i class="fa fa-tag"></i> Token</a>
+            <a href="/tags/ERC-20/" rel="tag"><i class="fa fa-tag"></i> ERC-20</a>
           
         </div>
       
@@ -642,8 +719,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/10/08/ETH-ERC721/" rel="prev" title="奇怪的画家">
-                奇怪的画家 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/10/08/introduce-to-nft/" rel="prev" title="画家和藏品">
+                画家和藏品 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -718,7 +795,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -740,7 +817,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">52</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

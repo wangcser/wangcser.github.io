@@ -82,18 +82,18 @@
 
 
 
-<meta name="description" content="传统网络中的二层帧、三层报文、四层 TCP流，UDP 数据报在 SDN 中都统称为流（flow）。流是 SDN 网络中最基本的东西，没想到的是，在创造流的过程中我也花了很多时间。 在搭建实验环境，编写控制器，测试网络连通性和网络性能等任务时都没有使用到“流”，只有到仿真的时候你才会切实地需要流，真实环境的流。正是做到这一步的时候我遇到了麻烦，一个逻辑上的麻烦。 什么是流啊？怎么生成流啊？怎么生成真">
+<meta name="description" content="传统网络中的二层帧、三层报文、四层 TCP流，UDP 数据报在 SDN 中都统称为流（flow）。流是 SDN 网络中最基本的东西，在搭建 SDN 实验环境，编写 SDN 控制器，测试网络连通性和网络性能等任务时你都可以不使用到“流”，只有到仿真的时候你才会切实地需要流，真实环境的流。有趣的是，在创造“流”的过程中我也花了很多时间——遇到了一个逻辑上的麻烦。 什么是流啊？怎么生成流啊？怎么生成真实">
 <meta name="keywords" content="SDN,flow">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何生成网络流">
 <meta property="og:url" content="http://yoursite.com/2019/03/05/flow-generation/index.html">
 <meta property="og:site_name" content="George Mandy">
-<meta property="og:description" content="传统网络中的二层帧、三层报文、四层 TCP流，UDP 数据报在 SDN 中都统称为流（flow）。流是 SDN 网络中最基本的东西，没想到的是，在创造流的过程中我也花了很多时间。 在搭建实验环境，编写控制器，测试网络连通性和网络性能等任务时都没有使用到“流”，只有到仿真的时候你才会切实地需要流，真实环境的流。正是做到这一步的时候我遇到了麻烦，一个逻辑上的麻烦。 什么是流啊？怎么生成流啊？怎么生成真">
+<meta property="og:description" content="传统网络中的二层帧、三层报文、四层 TCP流，UDP 数据报在 SDN 中都统称为流（flow）。流是 SDN 网络中最基本的东西，在搭建 SDN 实验环境，编写 SDN 控制器，测试网络连通性和网络性能等任务时你都可以不使用到“流”，只有到仿真的时候你才会切实地需要流，真实环境的流。有趣的是，在创造“流”的过程中我也花了很多时间——遇到了一个逻辑上的麻烦。 什么是流啊？怎么生成流啊？怎么生成真实">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-15T07:41:25.812Z">
+<meta property="og:updated_time" content="2019-07-27T12:11:46.117Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何生成网络流">
-<meta name="twitter:description" content="传统网络中的二层帧、三层报文、四层 TCP流，UDP 数据报在 SDN 中都统称为流（flow）。流是 SDN 网络中最基本的东西，没想到的是，在创造流的过程中我也花了很多时间。 在搭建实验环境，编写控制器，测试网络连通性和网络性能等任务时都没有使用到“流”，只有到仿真的时候你才会切实地需要流，真实环境的流。正是做到这一步的时候我遇到了麻烦，一个逻辑上的麻烦。 什么是流啊？怎么生成流啊？怎么生成真">
+<meta name="twitter:description" content="传统网络中的二层帧、三层报文、四层 TCP流，UDP 数据报在 SDN 中都统称为流（flow）。流是 SDN 网络中最基本的东西，在搭建 SDN 实验环境，编写 SDN 控制器，测试网络连通性和网络性能等任务时你都可以不使用到“流”，只有到仿真的时候你才会切实地需要流，真实环境的流。有趣的是，在创造“流”的过程中我也花了很多时间——遇到了一个逻辑上的麻烦。 什么是流啊？怎么生成流啊？怎么生成真实">
 
 
 
@@ -355,8 +355,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SDN/" itemprop="url" rel="index">
-                    <span itemprop="name">SDN</span>
+                  <a href="/categories/网络/" itemprop="url" rel="index">
+                    <span itemprop="name">网络</span>
                   </a>
                 </span>
 
@@ -388,7 +388,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  651 words
+                  629 words
                 </span>
               
 
@@ -425,13 +425,12 @@
       
 
       
-        <p>传统网络中的二层帧、三层报文、四层 TCP流，UDP 数据报在 SDN 中都统称为流（flow）。流是 SDN 网络中最基本的东西，没想到的是，在创造流的过程中我也花了很多时间。</p>
-<p>在搭建实验环境，编写控制器，测试网络连通性和网络性能等任务时都没有使用到“流”，只有到仿真的时候你才会切实地需要流，真实环境的流。正是做到这一步的时候我遇到了麻烦，一个逻辑上的麻烦。</p>
+        <p>传统网络中的二层帧、三层报文、四层 TCP流，UDP 数据报在 SDN 中都统称为流（flow）。流是 SDN 网络中最基本的东西，在搭建 SDN 实验环境，编写 SDN 控制器，测试网络连通性和网络性能等任务时你都可以不使用到“流”，只有到仿真的时候你才会切实地需要流，真实环境的流。有趣的是，在创造“流”的过程中我也花了很多时间——遇到了一个逻辑上的麻烦。</p>
 <p>什么是流啊？怎么生成流啊？怎么生成真实环境的流啊？</p>
-<p>这三个问题困扰了我好几天，我所参考的 SDN 文章文档中经过东拼西凑还是能给出系统设计的详细情况，但是对于系统是如何生成和使用流的，似乎所有人都是“看，那里有一条流，我们将其输入系统即可”，文章上是这么写的，但是对于我的实验来说就是“看，那里什么都没有”。</p>
-<p>因此我必须查阅更多的资料来找到大家创造流的蛛丝马迹。那么，流从哪里来呢？资料说，流从 iperf 来，流从 ping 中来。好家伙，iperf 不是使用 tcp 流测试网络带宽的吗？ping 不是使用 ICMP 测试网络连通性的吗？怎么还能用来生成流了？</p>
+<p>这三个问题困扰了我好几天，我所参考的 SDN 论文、书籍、文章、文档中都默认流就在系统中了，但是对于系统是如何生成和使用流的，似乎所有人都是“看，那里有一条流，我们将其输入系统即可”。文章上是这么写的，但是对于我的实验来说就是“看，那里什么都没有”。</p>
+<p>那么，流从哪里来呢？资料说，流从 iperf 来，流从 ping 中来。好家伙，iperf 不是使用 TCP 流测试网络带宽的吗？ping 不是使用 ICMP 测试网络连通性的吗？怎么还能用来生成流了？</p>
 <p>带着这样的疑问我又思考了一段时间，恍然大悟。</p>
-<p>原来答案一直就在流的定义里：传统网路中的二层帧、三层报文、四层 TCP流，UDP 数据报在 SDN 中都统称为流。根据仿真业务的需要生成特定的数据在 SDN 网络中就是我们所需要的流，因此，凡是能生成网络数据的工具都能用来生成流，比如:</p>
+<p>原来答案一直就在流的定义里：传统网路中的二层帧、三层报文、四层 TCP流，UDP 数据报在 SDN 中都统称为流。根据仿真业务的需要生成特定的数据在 SDN 网络中就是我们所需要的流，因此，<strong>凡是能生成网络数据的工具都能用来生成流</strong>，比如:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ping, iperf/iperf3, wget, curl, netperf, netcat, linux web packets, python scapy…</span><br></pre></td></tr></table></figure>
 <p>OK，知道了怎么生成流，那生成的流需要具有些什么特征呢？</p>
 <p>不同的论文根据其研究范围对流的特征有不同的要求，一般选择四层数据构成的五元组来定义一条流：</p>
@@ -443,6 +442,9 @@
 <li>四层：tcp 拓展字段，udp 拓展字段</li>
 </ul>
 <p>包括但不限于上面列举的特征，更多内容在 Openflow 标准中可以找到。</p>
+<blockquote>
+<p>这里可以逆向思考：OpenFlow 能匹配啥，我就能生成啥。</p>
+</blockquote>
 
       
     </div>
@@ -493,8 +495,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/05/fat-tree-topo/" rel="next" title="Fat Tree Topo">
-                <i class="fa fa-chevron-left"></i> Fat Tree Topo
+              <a href="/2019/03/05/fat-tree-topo/" rel="next" title="Fat Tree 拓扑">
+                <i class="fa fa-chevron-left"></i> Fat Tree 拓扑
               </a>
             
           </div>
@@ -579,7 +581,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -601,7 +603,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">52</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

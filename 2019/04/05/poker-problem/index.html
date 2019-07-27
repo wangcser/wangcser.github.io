@@ -71,7 +71,7 @@
 
 
 
-  <meta name="keywords" content="GameTheory,Algo," />
+  <meta name="keywords" content="GameTheory," />
 
 
 
@@ -83,14 +83,14 @@
 
 
 <meta name="description" content="今天遇到一个有趣的问题。 游戏描述村长和小明进行一个翻牌游戏，规则如下：  共有 2019 张牌 二者轮流翻牌，每次翻 15 ～ 29 张 谁最后不能拿够 15 张牌则判定其失败  请给出小明的取胜策略。 问题分析游戏的中间过程存在一种状态：$m = 15 + 29 = 44$ 。在该种状态下，不管先手拿多少张牌，记为 $x$，后手总能拿 $y = 44 - x$ 张牌，且 $x, y$ 都满足拿">
-<meta name="keywords" content="GameTheory,Algo">
+<meta name="keywords" content="GameTheory">
 <meta property="og:type" content="article">
 <meta property="og:title" content="翻牌游戏">
 <meta property="og:url" content="http://yoursite.com/2019/04/05/poker-problem/index.html">
 <meta property="og:site_name" content="George Mandy">
 <meta property="og:description" content="今天遇到一个有趣的问题。 游戏描述村长和小明进行一个翻牌游戏，规则如下：  共有 2019 张牌 二者轮流翻牌，每次翻 15 ～ 29 张 谁最后不能拿够 15 张牌则判定其失败  请给出小明的取胜策略。 问题分析游戏的中间过程存在一种状态：$m = 15 + 29 = 44$ 。在该种状态下，不管先手拿多少张牌，记为 $x$，后手总能拿 $y = 44 - x$ 张牌，且 $x, y$ 都满足拿">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-07T12:13:24.353Z">
+<meta property="og:updated_time" content="2019-07-27T13:04:25.916Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="翻牌游戏">
 <meta name="twitter:description" content="今天遇到一个有趣的问题。 游戏描述村长和小明进行一个翻牌游戏，规则如下：  共有 2019 张牌 二者轮流翻牌，每次翻 15 ～ 29 张 谁最后不能拿够 15 张牌则判定其失败  请给出小明的取胜策略。 问题分析游戏的中间过程存在一种状态：$m = 15 + 29 = 44$ 。在该种状态下，不管先手拿多少张牌，记为 $x$，后手总能拿 $y = 44 - x$ 张牌，且 $x, y$ 都满足拿">
@@ -355,8 +355,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/GameTheory/" itemprop="url" rel="index">
-                    <span itemprop="name">GameTheory</span>
+                  <a href="/categories/DSA/" itemprop="url" rel="index">
+                    <span itemprop="name">DSA</span>
                   </a>
                 </span>
 
@@ -450,7 +450,7 @@
 <p>在这种状态下，小明最少拿 15 张牌就能获胜（也必须拿 15 张牌）。</p>
 <h2 id="问题解答"><a href="#问题解答" class="headerlink" title="问题解答"></a>问题解答</h2><p>$2019 = 44 \times 45 + 39$，余数为 39。</p>
 <ol>
-<li>若村长先手，每次取 $x$ 张，若小明在每轮中执行中间状态策略，每次取 $44 - x​$ 张，则问题规模变为 39 张牌的问题，此时该村长不管怎么取，小明后手都无法完成游戏目标，小明失败，因此在村长先手的请款下小明不能直接维护中间状态！（过程中村长处于先手状态，如果其执行 2. 中小明的决策，则小明没有任何胜算，因此只能等待村长犯错！）</li>
+<li>若村长先手，每次取 $x$ 张，若小明在每轮中执行中间状态策略，每次取 $44 - x$ 张，则问题规模变为 39 张牌的问题，此时该村长不管怎么取，小明后手都无法完成游戏目标，小明失败，因此在村长先手的请款下小明不能直接维护中间状态！（过程中村长处于先手状态，如果其执行 2. 中小明的决策，则小明没有任何胜算，因此只能等待村长犯错！）</li>
 <li>若小明先手，先任意取 25 ～ 29 张牌，之后变为村长先手，小明主动维护中间状态，最终会给村长留下 10 ～ 14 张牌，村长无法满足游戏目标，村长失败</li>
 </ol>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
@@ -494,8 +494,6 @@
           
             <a href="/tags/GameTheory/" rel="tag"><i class="fa fa-tag"></i> GameTheory</a>
           
-            <a href="/tags/Algo/" rel="tag"><i class="fa fa-tag"></i> Algo</a>
-          
         </div>
       
 
@@ -507,8 +505,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/21/acdemic-manage/" rel="next" title="我的（跨平台、多设备）文献管理方案">
-                <i class="fa fa-chevron-left"></i> 我的（跨平台、多设备）文献管理方案
+              <a href="/2019/03/21/acdemic-manage/" rel="next" title="乔治的文献管理方案">
+                <i class="fa fa-chevron-left"></i> 乔治的文献管理方案
               </a>
             
           </div>
@@ -516,6 +514,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/28/约瑟夫环/" rel="prev" title="约瑟夫环">
+                约瑟夫环 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -598,7 +600,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -620,7 +622,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">52</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
